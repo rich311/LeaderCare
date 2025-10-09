@@ -202,7 +202,6 @@ export default function ProviderSearch({ initialProviders, userId }: ProviderSea
               <option value="">All</option>
               <option value="in-person">In-Person</option>
               <option value="virtual">Virtual</option>
-              <option value="both">Both</option>
             </select>
           </div>
 
