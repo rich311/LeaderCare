@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-Leader Care is a Next.js 15 application that provides holistic health support specifically for church leaders and ministry professionals. The platform features a provider directory, holistic health assessment tool, and AI-powered care plan generation.
+Leader Care is a Next.js 15 application that provides holistic health support specifically for ministry leaders. The platform features a provider directory, holistic health assessment tool, and AI-powered care plan generation.
 
 ## Development Commands
 

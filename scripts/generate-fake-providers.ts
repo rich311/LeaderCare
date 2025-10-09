@@ -89,7 +89,7 @@ const relationalSupport = [
 
 const bioTemplates = [
   'Passionate about helping individuals and families find healing and wholeness through faith-integrated counseling.',
-  'Dedicated to supporting church leaders and ministry professionals navigate the unique challenges of vocational ministry.',
+  'Dedicated to supporting ministry leaders navigate the unique challenges of vocational ministry.',
   'Committed to providing compassionate, evidence-based care that honors both psychological science and spiritual growth.',
   'Experienced in working with trauma survivors and those seeking restoration through therapeutic and spiritual practices.',
   'Focused on holistic wellness, integrating mental health, physical well-being, and spiritual formation.',

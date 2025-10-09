@@ -1,7 +1,7 @@
 import { redirect } from 'next/navigation'
 import { createClient } from '@/lib/supabase/server'
 import Navigation from '@/components/Navigation'
-import AssessmentForm from '@/components/AssessmentForm'
+import Script from 'next/script'
 
 export default async function AssessmentPage() {
   const supabase = await createClient()
@@ -25,9 +25,7 @@ export default async function AssessmentPage() {
           </div>
          
           <div data-tf-live="01K75B0Q011XMNHMPAXDKYE61C"></div>
-          <script src="//embed.typeform.com/next/embed.js"></script>
-
-          {/* <AssessmentForm userId={user.id} /> */}
+          <Script src="//embed.typeform.com/next/embed.js" strategy="lazyOnload" />
         </div>
       </div>
     </>

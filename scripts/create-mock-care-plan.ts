@@ -60,7 +60,7 @@ const recommendations = {
     },
     {
       title: 'Crisis Support Check-in',
-      description: 'Given your stress level (8/10), connect with a licensed therapist who specializes in clergy burnout within the next week.',
+      description: 'Given your stress level (8/10), connect with a licensed therapist who specializes in burnout within the next week.',
       priority: 'urgent',
       estimatedCost: 150
     }
@@ -74,7 +74,7 @@ const recommendations = {
     },
     {
       title: 'Attend a Ministry Leader Retreat',
-      description: 'Participate in a weekend retreat specifically designed for church leaders focusing on restoration, boundaries, and sustainable ministry.',
+      description: 'Participate in a weekend retreat specifically designed for ministry leaders focusing on restoration, boundaries, and sustainable ministry.',
       priority: 'high',
       estimatedCost: 800
     },
@@ -120,13 +120,13 @@ const recommendations = {
   resources: [
     {
       title: 'Recommended Providers',
-      description: 'Connect with licensed therapists who specialize in clergy care and understand the unique pressures of ministry leadership. Look for providers offering faith-integrated care.',
+      description: 'Connect with licensed therapists who understand the unique pressures of ministry leadership. Look for providers offering faith-integrated care.',
       priority: 'high',
       estimatedCost: 0
     },
     {
       title: 'Retreat Centers',
-      description: 'Explore retreat centers that offer programs specifically for church leaders and ministry professionals.',
+      description: 'Explore retreat centers that offer programs specifically for ministry leaders.',
       priority: 'medium',
       estimatedCost: 0
     },

@@ -80,7 +80,7 @@ Run this SQL in Supabase SQL Editor to add test providers:
 
 ```sql
 INSERT INTO providers (name, credentials, specialties, bio, email, city, state, telehealth_available, faith_based, accepting_new_clients) VALUES
-('Dr. Sarah Johnson', 'PhD, LPC', ARRAY['Burnout', 'Anxiety', 'Depression'], 'Specializing in clergy burnout and compassion fatigue with 15+ years experience.', 'sarah.johnson@example.com', 'Nashville', 'TN', true, true, true),
+('Dr. Sarah Johnson', 'PhD, LPC', ARRAY['Burnout', 'Anxiety', 'Depression'], 'Specializing in burnout and compassion fatigue with 15+ years experience working with ministry leaders.', 'sarah.johnson@example.com', 'Nashville', 'TN', true, true, true),
 ('Rev. Michael Chen', 'MDiv, LMFT', ARRAY['Relationship Issues', 'Spiritual Crisis', 'Work-Life Balance'], 'Faith-integrated counseling for ministry leaders and their families.', 'michael.chen@example.com', 'Austin', 'TX', true, true, true),
 ('Dr. Emily Rodriguez', 'PsyD', ARRAY['Anxiety', 'Moral Injury', 'Grief/Loss'], 'Trauma-informed care with understanding of unique ministry pressures.', 'emily.rodriguez@example.com', 'Chicago', 'IL', false, false, true);
 ```

@@ -27,6 +27,7 @@ interface Recommendations {
 export default function CarePlanView({ carePlan }: CarePlanViewProps) {
   const recommendations = carePlan.recommendations as Recommendations
   const [selectedItems, setSelectedItems] = useState<Set<string>>(new Set())
+  const [showPopup, setShowPopup] = useState(false)
 
   const toggleItem = (category: string, index: number) => {
     const key = `${category}-${index}`
@@ -64,6 +65,14 @@ export default function CarePlanView({ carePlan }: CarePlanViewProps) {
 
     return total
   }, [selectedItems, recommendations])
+
+  const handleSendToBoard = () => {
+    setShowPopup(true)
+    // Auto-hide popup after 5 seconds
+    setTimeout(() => {
+      setShowPopup(false)
+    }, 5000)
+  }
 
   const getPriorityColor = (priority: string) => {
     switch (priority) {
@@ -293,6 +302,7 @@ export default function CarePlanView({ carePlan }: CarePlanViewProps) {
             Find a Provider
           </a>
           <button
+            onClick={handleSendToBoard}
             className="inline-flex items-center px-4 py-2 border border-blue-600 text-sm font-medium rounded-md text-blue-600 bg-white hover:bg-blue-50"
           >
             <Send className="h-4 w-4 mr-2" />
@@ -300,6 +310,31 @@ export default function CarePlanView({ carePlan }: CarePlanViewProps) {
           </button>
         </div>
       </div>
+
+      {/* Popup Modal */}
+      {showPopup && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 px-4">
+          <div className="bg-white rounded-lg shadow-xl p-8 max-w-md w-full animate-fade-in">
+            <div className="text-center">
+              <div className="mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-green-100 mb-4">
+                <CheckCircle className="h-10 w-10 text-green-600" />
+              </div>
+              <h3 className="text-2xl font-bold text-gray-900 mb-2">
+                Your plan is on the way!
+              </h3>
+              <p className="text-gray-600 mb-6">
+                You will hear back in 48 hours
+              </p>
+              <button
+                onClick={() => setShowPopup(false)}
+                className="px-6 py-2 bg-blue-600 text-white font-medium rounded-md hover:bg-blue-700 transition-colors"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   )
 }

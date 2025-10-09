@@ -136,8 +136,18 @@ export default function RecommendedProvidersView({ carePlan, allProviders }: Rec
       }
     })
 
-    // Sort by match score and return top 10
-    return matches.sort((a, b) => b.matchScore - a.matchScore).slice(0, 10)
+    // Normalize scores to be under 100%
+    // Find the max possible score (sum of all potential points)
+    const maxPossibleScore = 130 // Maximum points: 100 (5 concerns x 20) + 15 + 10 + 15 + 20 (both formats) + 25 (retreat + weekend) + 15 + 10 + 5 + 5 + 5
+
+    // Normalize each match score to a percentage and cap at 95%
+    const normalizedMatches = matches.map(match => ({
+      ...match,
+      matchScore: Math.min(Math.round((match.matchScore / maxPossibleScore) * 100), 95)
+    }))
+
+    // Sort by match score and return top 3
+    return normalizedMatches.sort((a, b) => b.matchScore - a.matchScore).slice(0, 3)
   }, [allProviders, assessmentData])
 
   return (
