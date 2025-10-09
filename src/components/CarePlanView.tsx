@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useMemo } from 'react'
+import Image from 'next/image'
 import { AlertCircle, CheckCircle, Clock, Heart, Plus, X, Send, Download } from 'lucide-react'
 import type { Database } from '@/types/database.types'
 
@@ -15,6 +16,7 @@ interface Recommendation {
   description: string;
   priority?: string;
   estimatedCost?: number;
+  logo?: string;
 }
 
 interface Recommendations {
@@ -301,6 +303,9 @@ export default function CarePlanView({ carePlan }: CarePlanViewProps) {
                   <div className="flex-1 py-2">
                     <div className="flex items-center gap-2">
                       <h3 className="font-medium text-gray-900">{item.title}</h3>
+                      {item.logo && (
+                        <Image src={item.logo} alt="Gloo Impact" width={60} height={16} className="h-4 w-auto" />
+                      )}
                       {item.estimatedCost && (
                         <span className="text-sm font-semibold text-green-700">
                           ${item.estimatedCost.toLocaleString()}
@@ -377,7 +382,7 @@ export default function CarePlanView({ carePlan }: CarePlanViewProps) {
               value={customDescription}
               onChange={(e) => setCustomDescription(e.target.value)}
               placeholder="e.g., Additional therapy sessions"
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-900"
             />
           </div>
           <div>
@@ -391,7 +396,7 @@ export default function CarePlanView({ carePlan }: CarePlanViewProps) {
               placeholder="0.00"
               min="0"
               step="0.01"
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-900"
             />
           </div>
           <button
@@ -434,17 +439,6 @@ export default function CarePlanView({ carePlan }: CarePlanViewProps) {
           <li>Return to update your care plan as your needs evolve</li>
         </ul>
         <div className="mt-4 flex flex-wrap gap-3">
-          <a
-            href="/recommended-providers"
-            className={`inline-flex items-center px-4 py-2 border text-sm font-medium rounded-md transition-colors ${
-              planSent
-                ? 'border-transparent text-white bg-blue-600 hover:bg-blue-700'
-                : 'border-gray-300 text-gray-700 bg-white hover:bg-gray-50'
-            }`}
-          >
-            Find a Provider
-          </a>
-
           {planSent ? (
             <div className="inline-flex items-center px-4 py-2 text-sm font-medium text-green-700 bg-green-50 border border-green-300 rounded-md">
               <CheckCircle className="h-4 w-4 mr-2" />
@@ -459,6 +453,17 @@ export default function CarePlanView({ carePlan }: CarePlanViewProps) {
               Send Plan to Board
             </button>
           )}
+
+          <a
+            href="/recommended-providers"
+            className={`inline-flex items-center px-4 py-2 border text-sm font-medium rounded-md transition-colors ${
+              planSent
+                ? 'border-transparent text-white bg-blue-600 hover:bg-blue-700'
+                : 'border-gray-300 text-gray-700 bg-white hover:bg-gray-50'
+            }`}
+          >
+            Find a Provider
+          </a>
 
           <button
             onClick={() => window.print()}

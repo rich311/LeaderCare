@@ -107,7 +107,7 @@ export default function AssessmentForm({ userId }: AssessmentFormProps) {
       immediate: Array<{ title: string; description: string; priority?: string }>;
       shortTerm: Array<{ title: string; description: string }>;
       longTerm: Array<{ title: string; description: string }>;
-      resources: Array<{ title: string; description: string }>;
+      resources: Array<{ title: string; description: string; logo?: string }>;
     } = {
       immediate: [],
       shortTerm: [],
@@ -167,6 +167,12 @@ export default function AssessmentForm({ userId }: AssessmentFormProps) {
     recommendations.resources.push({
       title: 'Support Groups',
       description: 'Connect with other ministry leaders facing similar challenges.'
+    })
+
+    recommendations.resources.push({
+      title: 'Recommended Providers',
+      description: 'View AI-recommended providers matched to your specific needs and preferences.',
+      logo: 'https://gloo.impact.xyz/logo-black.png'
     })
 
     return recommendations
