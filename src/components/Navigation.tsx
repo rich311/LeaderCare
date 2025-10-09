@@ -2,10 +2,10 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { Heart, User, FileText, LogOut, Menu, X } from 'lucide-react'
+import { Heart, User, LogOut, Menu, X } from 'lucide-react'
 import { useState } from 'react'
 
-export default function Navigation({ user }: { user: any }) {
+export default function Navigation({ user }: { user: { id: string; email?: string } | null }) {
   const pathname = usePathname()
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 

@@ -79,7 +79,7 @@ export default function AssessmentForm({ userId }: AssessmentFormProps) {
       const priorityLevel = determinePriorityLevel(formData)
 
       // Create care plan
-      const { data, error } = await supabase
+      const { error } = await supabase
         .from('care_plans')
         .insert({
           user_id: userId,
@@ -103,7 +103,12 @@ export default function AssessmentForm({ userId }: AssessmentFormProps) {
   }
 
   const generateRecommendations = (data: AssessmentData) => {
-    const recommendations: any = {
+    const recommendations: {
+      immediate: Array<{ title: string; description: string; priority?: string }>;
+      shortTerm: Array<{ title: string; description: string }>;
+      longTerm: Array<{ title: string; description: string }>;
+      resources: Array<{ title: string; description: string }>;
+    } = {
       immediate: [],
       shortTerm: [],
       longTerm: [],

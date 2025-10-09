@@ -9,8 +9,21 @@ interface CarePlanViewProps {
   carePlan: CarePlan
 }
 
+interface Recommendation {
+  title: string;
+  description: string;
+  priority?: string;
+}
+
+interface Recommendations {
+  immediate?: Recommendation[];
+  shortTerm?: Recommendation[];
+  longTerm?: Recommendation[];
+  resources?: Recommendation[];
+}
+
 export default function CarePlanView({ carePlan }: CarePlanViewProps) {
-  const recommendations = carePlan.recommendations as any
+  const recommendations = carePlan.recommendations as Recommendations
 
   const getPriorityColor = (priority: string) => {
     switch (priority) {
@@ -44,7 +57,7 @@ export default function CarePlanView({ carePlan }: CarePlanViewProps) {
             <h2 className="text-xl font-semibold text-gray-900">Immediate Actions</h2>
           </div>
           <div className="space-y-4">
-            {recommendations.immediate.map((item: any, index: number) => (
+            {recommendations.immediate.map((item, index: number) => (
               <div key={index} className="border-l-4 border-red-500 pl-4">
                 <h3 className="font-medium text-gray-900">{item.title}</h3>
                 <p className="text-gray-600 mt-1">{item.description}</p>
@@ -62,7 +75,7 @@ export default function CarePlanView({ carePlan }: CarePlanViewProps) {
             <h2 className="text-xl font-semibold text-gray-900">Short-term Recommendations</h2>
           </div>
           <div className="space-y-4">
-            {recommendations.shortTerm.map((item: any, index: number) => (
+            {recommendations.shortTerm.map((item, index: number) => (
               <div key={index} className="border-l-4 border-blue-500 pl-4">
                 <h3 className="font-medium text-gray-900">{item.title}</h3>
                 <p className="text-gray-600 mt-1">{item.description}</p>
@@ -80,7 +93,7 @@ export default function CarePlanView({ carePlan }: CarePlanViewProps) {
             <h2 className="text-xl font-semibold text-gray-900">Long-term Goals</h2>
           </div>
           <div className="space-y-4">
-            {recommendations.longTerm.map((item: any, index: number) => (
+            {recommendations.longTerm.map((item, index: number) => (
               <div key={index} className="border-l-4 border-green-500 pl-4">
                 <h3 className="font-medium text-gray-900">{item.title}</h3>
                 <p className="text-gray-600 mt-1">{item.description}</p>
@@ -98,7 +111,7 @@ export default function CarePlanView({ carePlan }: CarePlanViewProps) {
             <h2 className="text-xl font-semibold text-gray-900">Helpful Resources</h2>
           </div>
           <div className="space-y-4">
-            {recommendations.resources.map((item: any, index: number) => (
+            {recommendations.resources.map((item, index: number) => (
               <div key={index} className="border-l-4 border-purple-500 pl-4">
                 <h3 className="font-medium text-gray-900">{item.title}</h3>
                 <p className="text-gray-600 mt-1">{item.description}</p>
