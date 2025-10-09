@@ -50,7 +50,7 @@ export default function CarePlanView({ carePlan }: CarePlanViewProps) {
       </div>
 
       {/* Immediate Actions */}
-      {recommendations.immediate?.length > 0 && (
+      {recommendations.immediate && recommendations.immediate.length > 0 && (
         <div className="bg-white rounded-lg shadow p-6">
           <div className="flex items-center mb-4">
             <AlertCircle className="h-6 w-6 text-red-600 mr-2" />
@@ -68,7 +68,7 @@ export default function CarePlanView({ carePlan }: CarePlanViewProps) {
       )}
 
       {/* Short-term Recommendations */}
-      {recommendations.shortTerm?.length > 0 && (
+      {recommendations.shortTerm && recommendations.shortTerm.length > 0 && (
         <div className="bg-white rounded-lg shadow p-6">
           <div className="flex items-center mb-4">
             <Clock className="h-6 w-6 text-blue-600 mr-2" />
@@ -86,7 +86,7 @@ export default function CarePlanView({ carePlan }: CarePlanViewProps) {
       )}
 
       {/* Long-term Goals */}
-      {recommendations.longTerm?.length > 0 && (
+      {recommendations.longTerm && recommendations.longTerm.length > 0 && (
         <div className="bg-white rounded-lg shadow p-6">
           <div className="flex items-center mb-4">
             <CheckCircle className="h-6 w-6 text-green-600 mr-2" />
@@ -104,7 +104,7 @@ export default function CarePlanView({ carePlan }: CarePlanViewProps) {
       )}
 
       {/* Resources */}
-      {recommendations.resources?.length > 0 && (
+      {recommendations.resources && recommendations.resources.length > 0 && (
         <div className="bg-white rounded-lg shadow p-6">
           <div className="flex items-center mb-4">
             <Heart className="h-6 w-6 text-purple-600 mr-2" />
