@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useMemo } from 'react'
-import { Search, MapPin, Star, Heart, Phone, Mail, Globe } from 'lucide-react'
+import { Search, MapPin, Star, Heart, Phone, Mail, Globe, ChevronDown } from 'lucide-react'
 import type { Database } from '@/types/database.types'
 
 type Provider = Database['public']['Tables']['providers']['Row']
@@ -24,6 +24,7 @@ export default function ProviderSearch({ initialProviders, userId }: ProviderSea
   const [actualTherapists, setActualTherapists] = useState(false)
   const [selectedRelationalSupport, setSelectedRelationalSupport] = useState<string>('')
   const [benevolenceRequest, setBenevolenceRequest] = useState(false)
+  const [specialtiesExpanded, setSpecialtiesExpanded] = useState(false)
 
   // Get all unique specialties
   const allSpecialties = useMemo(() => {
@@ -276,23 +277,36 @@ export default function ProviderSearch({ initialProviders, userId }: ProviderSea
           </div>
 
           {/* Specialties */}
-          <div className="mt-6">
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              Specialties
-            </label>
-            <div className="space-y-2 max-h-48 overflow-y-auto">
-              {allSpecialties.map(specialty => (
-                <label key={specialty} className="flex items-center">
-                  <input
-                    type="checkbox"
-                    checked={selectedSpecialties.includes(specialty)}
-                    onChange={() => toggleSpecialty(specialty)}
-                    className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
-                  />
-                  <span className="ml-2 text-sm text-gray-700">{specialty}</span>
-                </label>
-              ))}
-            </div>
+          <div className="mt-6 border-t pt-4">
+            <button
+              onClick={() => setSpecialtiesExpanded(!specialtiesExpanded)}
+              className="w-full flex items-center justify-between text-sm font-medium text-gray-700 hover:text-gray-900"
+            >
+              <span>
+                Specialties
+                {selectedSpecialties.length > 0 && (
+                  <span className="ml-2 text-xs text-blue-600">({selectedSpecialties.length} selected)</span>
+                )}
+              </span>
+              <ChevronDown
+                className={`h-5 w-5 transition-transform ${specialtiesExpanded ? 'transform rotate-180' : ''}`}
+              />
+            </button>
+            {specialtiesExpanded && (
+              <div className="mt-3 space-y-2 max-h-48 overflow-y-auto">
+                {allSpecialties.map(specialty => (
+                  <label key={specialty} className="flex items-center">
+                    <input
+                      type="checkbox"
+                      checked={selectedSpecialties.includes(specialty)}
+                      onChange={() => toggleSpecialty(specialty)}
+                      className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+                    />
+                    <span className="ml-2 text-sm text-gray-700">{specialty}</span>
+                  </label>
+                ))}
+              </div>
+            )}
           </div>
         </div>
       </div>
