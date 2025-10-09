@@ -40,9 +40,9 @@ export default async function Home() {
               <div className="flex items-center justify-center h-12 w-12 rounded-md bg-blue-500 text-white mx-auto">
                 <Search className="h-6 w-6" />
               </div>
-              <h3 className="mt-6 text-lg font-medium text-gray-900">Find Providers</h3>
+              <h3 className="mt-6 text-lg font-medium text-gray-900">Take an Assessment</h3>
               <p className="mt-2 text-base text-gray-500">
-                Search our directory of holistic care professionals who understand ministry challenges
+                Figures out your specific needs and challenges to help you find the right plan
               </p>
             </div>
 
@@ -62,17 +62,7 @@ export default async function Home() {
               </div>
               <h3 className="mt-6 text-lg font-medium text-gray-900">Faith-Integrated Care</h3>
               <p className="mt-2 text-base text-gray-500">
-                Connect with providers who can integrate faith perspectives into treatment
-              </p>
-            </div>
-
-            <div className="text-center">
-              <div className="flex items-center justify-center h-12 w-12 rounded-md bg-blue-500 text-white mx-auto">
-                <Shield className="h-6 w-6" />
-              </div>
-              <h3 className="mt-6 text-lg font-medium text-gray-900">Confidential & Secure</h3>
-              <p className="mt-2 text-base text-gray-500">
-                Your privacy is protected with secure, encrypted data storage
+                Search our directory of holistic care professionals who understand ministry challenges
               </p>
             </div>
           </div>
