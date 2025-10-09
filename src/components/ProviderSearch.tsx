@@ -118,7 +118,7 @@ export default function ProviderSearch({ initialProviders, userId }: ProviderSea
     <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
       {/* Filters Sidebar */}
       <div className="lg:col-span-1">
-        <div className="bg-white rounded-lg shadow p-6 sticky top-6">
+        <div className="bg-white rounded-lg shadow p-6 sticky top-6 max-h-[calc(100vh-3rem)] overflow-y-auto">
           <h2 className="text-lg font-semibold text-gray-900 mb-4">Filters</h2>
 
           {/* Search */}
@@ -135,26 +135,6 @@ export default function ProviderSearch({ initialProviders, userId }: ProviderSea
                 className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
               />
               <Search className="absolute left-3 top-2.5 h-5 w-5 text-gray-400" />
-            </div>
-          </div>
-
-          {/* Specialties */}
-          <div className="mb-6">
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              Specialties
-            </label>
-            <div className="space-y-2 max-h-48 overflow-y-auto">
-              {allSpecialties.map(specialty => (
-                <label key={specialty} className="flex items-center">
-                  <input
-                    type="checkbox"
-                    checked={selectedSpecialties.includes(specialty)}
-                    onChange={() => toggleSpecialty(specialty)}
-                    className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
-                  />
-                  <span className="ml-2 text-sm text-gray-700">{specialty}</span>
-                </label>
-              ))}
             </div>
           </div>
 
@@ -293,6 +273,26 @@ export default function ProviderSearch({ initialProviders, userId }: ProviderSea
               />
               <span className="ml-2 text-sm text-gray-700">Benevolence Request</span>
             </label>
+          </div>
+
+          {/* Specialties */}
+          <div className="mt-6">
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              Specialties
+            </label>
+            <div className="space-y-2 max-h-48 overflow-y-auto">
+              {allSpecialties.map(specialty => (
+                <label key={specialty} className="flex items-center">
+                  <input
+                    type="checkbox"
+                    checked={selectedSpecialties.includes(specialty)}
+                    onChange={() => toggleSpecialty(specialty)}
+                    className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+                  />
+                  <span className="ml-2 text-sm text-gray-700">{specialty}</span>
+                </label>
+              ))}
+            </div>
           </div>
         </div>
       </div>
