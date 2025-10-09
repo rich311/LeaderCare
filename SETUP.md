@@ -50,7 +50,7 @@ Open [http://localhost:3000](http://localhost:3000) to see the app.
 ### Pages Created
 - **Homepage** (`/`) - Landing page with features overview
 - **Provider Directory** (`/providers`) - Searchable directory with filters
-- **Mental Health Assessment** (`/assessment`) - Multi-step assessment form
+- **Holistic Health Assessment** (`/assessment`) - Multi-step assessment form
 - **Care Plan** (`/care-plan`) - Personalized care plan display
 - **Authentication** (`/auth/login`, `/auth/signup`) - Sign up and login pages
 
@@ -66,7 +66,7 @@ Open [http://localhost:3000](http://localhost:3000) to see the app.
 
 ### Database Tables
 - `profiles` - User profiles (auto-created on signup)
-- `providers` - Mental health provider directory
+- `providers` - Holistic health provider directory
 - `care_plans` - User care plans with recommendations
 - `care_plan_resources` - Resources linked to care plans
 - `provider_reviews` - Provider ratings and reviews

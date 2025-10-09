@@ -128,7 +128,7 @@ export default function AssessmentForm({ userId }: AssessmentFormProps) {
     if (data.preferences.faithBased) {
       recommendations.shortTerm.push({
         title: 'Faith-Based Counseling',
-        description: 'Connect with a mental health professional who can integrate your faith perspective into treatment.'
+        description: 'Connect with a holistic health professional who can integrate your faith perspective into treatment.'
       })
     }
 
@@ -328,7 +328,7 @@ export default function AssessmentForm({ userId }: AssessmentFormProps) {
               value={formData.goals}
               onChange={(e) => setFormData({ ...formData, goals: e.target.value })}
               rows={4}
-              placeholder="What would you like to achieve through mental health support?"
+              placeholder="What would you like to achieve through holistic health support?"
               className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
             />
           </div>

@@ -1,11 +1,11 @@
 # Leader Care
 
-A mental health support platform designed specifically for church leaders and ministry professionals. Leader Care helps users find compassionate mental health providers and generates personalized care plans tailored to the unique challenges of ministry leadership.
+A holistic health support platform designed specifically for church leaders and ministry professionals. Leader Care helps users find compassionate holistic health providers and generates personalized care plans tailored to the unique challenges of ministry leadership.
 
 ## Features
 
-- **Provider Directory**: Search and filter mental health professionals by specialty, location, insurance, and more
-- **Mental Health Assessment**: Comprehensive assessment tool to evaluate current mental health needs
+- **Provider Directory**: Search and filter holistic health professionals by specialty, location, insurance, and more
+- **Holistic Health Assessment**: Comprehensive assessment tool to evaluate current holistic health needs
 - **AI-Powered Care Plans**: Automatically generated personalized care plans based on assessment results
 - **Faith-Integrated Options**: Connect with providers who can integrate faith perspectives into treatment
 - **Secure & Confidential**: Built with privacy and security as top priorities using Supabase
@@ -68,7 +68,7 @@ leader-care/
 │   ├── app/              # Next.js app router pages
 │   │   ├── auth/         # Authentication pages and routes
 │   │   ├── providers/    # Provider directory
-│   │   ├── assessment/   # Mental health assessment
+│   │   ├── assessment/   # Holistic health assessment
 │   │   └── care-plan/    # Care plan display
 │   ├── components/       # React components
 │   ├── lib/              # Utility functions and configurations
@@ -91,7 +91,7 @@ leader-care/
 The application uses the following main tables:
 
 - **profiles**: Extended user profiles (linked to Supabase auth.users)
-- **providers**: Mental health provider directory
+- **providers**: Holistic health provider directory
 - **care_plans**: User care plans with assessment data and recommendations
 - **care_plan_resources**: Resources linked to care plans
 - **provider_reviews**: User reviews and ratings for providers

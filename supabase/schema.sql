@@ -14,7 +14,7 @@ create table public.profiles (
   updated_at timestamp with time zone default timezone('utc'::text, now()) not null
 );
 
--- Create mental health providers table
+-- Create holistic health providers table
 create table public.providers (
   id uuid default uuid_generate_v4() primary key,
   user_id uuid references public.profiles(id) on delete cascade,
