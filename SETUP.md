@@ -50,7 +50,7 @@ Open [http://localhost:3000](http://localhost:3000) to see the app.
 ### Pages Created
 - **Homepage** (`/`) - Landing page with features overview
 - **Provider Directory** (`/providers`) - Searchable directory with filters
-- **Holistic Health Assessment** (`/assessment`) - Multi-step assessment form
+- **Holistic Care Assessment** (`/assessment`) - Multi-step assessment form
 - **Care Plan** (`/care-plan`) - Personalized care plan display
 - **Authentication** (`/auth/login`, `/auth/signup`) - Sign up and login pages
 

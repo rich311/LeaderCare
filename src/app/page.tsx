@@ -16,25 +16,18 @@ export default async function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-16 sm:pt-20 sm:pb-24">
           <div className="text-center">
             <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-gray-900 tracking-tight">
-              Holistic Health Care for
+              Holistic Care for
               <span className="block text-blue-600">Church Leaders</span>
             </h1>
             <p className="mt-6 max-w-2xl mx-auto text-xl text-gray-500">
-              Find compassionate holistic health providers and create personalized care plans
-              designed specifically for those in ministry leadership.
+              Create personalized care plans designed specifically for those in ministry leadership.
             </p>
             <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
               <Link
                 href="/assessment"
                 className="inline-flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 md:text-lg"
               >
-                Start Assessment
-              </Link>
-              <Link
-                href="/providers"
-                className="inline-flex items-center justify-center px-8 py-3 border border-gray-300 text-base font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 md:text-lg"
-              >
-                Find Providers
+                Let&apos;s Make a Plan
               </Link>
             </div>
           </div>
@@ -49,7 +42,7 @@ export default async function Home() {
               </div>
               <h3 className="mt-6 text-lg font-medium text-gray-900">Find Providers</h3>
               <p className="mt-2 text-base text-gray-500">
-                Search our directory of holistic health professionals who understand ministry challenges
+                Search our directory of holistic care professionals who understand ministry challenges
               </p>
             </div>
 
@@ -89,7 +82,7 @@ export default async function Home() {
         <div className="bg-blue-600 mt-16">
           <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:py-16 lg:px-8 lg:flex lg:items-center lg:justify-between">
             <h2 className="text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
-              <span className="block">Ready to prioritize your holistic health?</span>
+              <span className="block">Ready to prioritize your holistic care?</span>
               <span className="block text-blue-200">Start your journey today.</span>
             </h2>
             <div className="mt-8 flex lg:mt-0 lg:flex-shrink-0">

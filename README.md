@@ -1,11 +1,11 @@
 # Leader Care
 
-A holistic health support platform designed specifically for church leaders and ministry professionals. Leader Care helps users find compassionate holistic health providers and generates personalized care plans tailored to the unique challenges of ministry leadership.
+A holistic care support platform designed specifically for church leaders and ministry professionals. Leader Care helps users find compassionate holistic care providers and generates personalized care plans tailored to the unique challenges of ministry leadership.
 
 ## Features
 
-- **Provider Directory**: Search and filter holistic health professionals by specialty, location, insurance, and more
-- **Holistic Health Assessment**: Comprehensive assessment tool to evaluate current holistic health needs
+- **Provider Directory**: Search and filter holistic care professionals by specialty, location, insurance, and more
+- **Holistic Care Assessment**: Comprehensive assessment tool to evaluate current holistic care needs
 - **AI-Powered Care Plans**: Automatically generated personalized care plans based on assessment results
 - **Faith-Integrated Options**: Connect with providers who can integrate faith perspectives into treatment
 - **Secure & Confidential**: Built with privacy and security as top priorities using Supabase
