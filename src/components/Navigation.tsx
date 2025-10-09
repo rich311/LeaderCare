@@ -10,10 +10,9 @@ export default function Navigation({ user }: { user: { id: string; email?: strin
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   const navigation = [
-    { name: 'Home', href: '/' },
-    { name: 'Find Providers', href: '/providers' },
     { name: 'My Care Plan', href: '/care-plan' },
     { name: 'Assessment', href: '/assessment' },
+    { name: 'Find Providers', href: '/providers' },
   ]
 
   return (

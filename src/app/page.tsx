@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import { createClient } from '@/lib/supabase/server'
 import Navigation from '@/components/Navigation'
-import { Heart, Search, FileText, Shield } from 'lucide-react'
+import { Heart, Search, FileText } from 'lucide-react'
 
 export default async function Home() {
   const supabase = await createClient()
@@ -35,10 +35,10 @@ export default async function Home() {
 
         {/* Features Section */}
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-          <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="grid grid-cols-1 gap-8 sm:grid-cols-3 max-w-4xl mx-auto">
             <div className="text-center">
               <div className="flex items-center justify-center h-12 w-12 rounded-md bg-blue-500 text-white mx-auto">
-                <Search className="h-6 w-6" />
+                <FileText className="h-6 w-6" />
               </div>
               <h3 className="mt-6 text-lg font-medium text-gray-900">Take an Assessment</h3>
               <p className="mt-2 text-base text-gray-500">
@@ -48,7 +48,7 @@ export default async function Home() {
 
             <div className="text-center">
               <div className="flex items-center justify-center h-12 w-12 rounded-md bg-blue-500 text-white mx-auto">
-                <FileText className="h-6 w-6" />
+                <Heart className="h-6 w-6" />
               </div>
               <h3 className="mt-6 text-lg font-medium text-gray-900">Personalized Care Plans</h3>
               <p className="mt-2 text-base text-gray-500">
@@ -58,7 +58,7 @@ export default async function Home() {
 
             <div className="text-center">
               <div className="flex items-center justify-center h-12 w-12 rounded-md bg-blue-500 text-white mx-auto">
-                <Heart className="h-6 w-6" />
+                <Search className="h-6 w-6" />
               </div>
               <h3 className="mt-6 text-lg font-medium text-gray-900">Faith-Integrated Care</h3>
               <p className="mt-2 text-base text-gray-500">
