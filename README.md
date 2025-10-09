@@ -1,6 +1,6 @@
 # Leader Care
 
-A holistic care support platform designed specifically for church leaders and ministry professionals. Leader Care helps users find compassionate holistic care providers and generates personalized care plans tailored to the unique challenges of ministry leadership.
+A holistic care support platform designed specifically for ministry leaders. Leader Care helps users find compassionate holistic care providers and generates personalized care plans tailored to the unique challenges of ministry leadership.
 
 ## Features
 

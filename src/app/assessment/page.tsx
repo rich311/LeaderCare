@@ -23,10 +23,9 @@ export default async function AssessmentPage() {
               Your responses are confidential and secure.
             </p>
           </div>
-          <script src="https://js.hsforms.net/forms/embed/45343799.js" defer></script>
-          <div className="hs-form-frame" data-region="na1" data-form-id="369f0e65-28e8-4afe-957d-ea7ed2cd494b" data-portal-id="45343799"></div>
-
-
+         
+          <div data-tf-live="01K75B0Q011XMNHMPAXDKYE61C"></div>
+          <script src="//embed.typeform.com/next/embed.js"></script>
 
           {/* <AssessmentForm userId={user.id} /> */}
         </div>

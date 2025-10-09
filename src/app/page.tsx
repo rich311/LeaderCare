@@ -17,10 +17,10 @@ export default async function Home() {
           <div className="text-center">
             <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-gray-900 tracking-tight">
               Holistic Care for
-              <span className="block text-blue-600">Church Leaders</span>
+              <span className="block text-blue-600">Ministry Leaders</span>
             </h1>
             <p className="mt-6 max-w-2xl mx-auto text-xl text-gray-500">
-              Create personalized care plans designed specifically for those in ministry leadership.
+              Create personalized care plans designed specifically for ministry leaders.
             </p>
             <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
               <Link

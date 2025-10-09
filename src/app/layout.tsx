@@ -13,8 +13,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Leader Care - Holistic Care Support for Church Leaders",
-  description: "Find holistic care providers and create personalized care plans designed for church leaders and ministry professionals.",
+  title: "Leader Care - Holistic Care Support for Ministry Leaders",
+  description: "Find holistic care providers and create personalized care plans designed for ministry leaders.",
 };
 
 export default function RootLayout({
