@@ -1,6 +1,6 @@
 'use client'
 
-import { AlertCircle, CheckCircle, Clock, Heart } from 'lucide-react'
+import { AlertCircle, CheckCircle, Clock, Heart, Plus, Send } from 'lucide-react'
 import type { Database } from '@/types/database.types'
 
 type CarePlan = Database['public']['Tables']['care_plans']['Row']
@@ -58,9 +58,18 @@ export default function CarePlanView({ carePlan }: CarePlanViewProps) {
           </div>
           <div className="space-y-4">
             {recommendations.immediate.map((item, index: number) => (
-              <div key={index} className="border-l-4 border-red-500 pl-4">
-                <h3 className="font-medium text-gray-900">{item.title}</h3>
-                <p className="text-gray-600 mt-1">{item.description}</p>
+              <div key={index} className="border-l-4 border-red-500 pl-4 flex items-start justify-between">
+                <div className="flex-1">
+                  <h3 className="font-medium text-gray-900">{item.title}</h3>
+                  <p className="text-gray-600 mt-1">{item.description}</p>
+                </div>
+                <button
+                  className="ml-4 p-2 text-gray-400 hover:text-blue-600 hover:bg-blue-50 rounded-full transition-colors"
+                  aria-label="Add to plan"
+                  title="Add to plan"
+                >
+                  <Plus className="h-5 w-5" />
+                </button>
               </div>
             ))}
           </div>
@@ -76,9 +85,18 @@ export default function CarePlanView({ carePlan }: CarePlanViewProps) {
           </div>
           <div className="space-y-4">
             {recommendations.shortTerm.map((item, index: number) => (
-              <div key={index} className="border-l-4 border-blue-500 pl-4">
-                <h3 className="font-medium text-gray-900">{item.title}</h3>
-                <p className="text-gray-600 mt-1">{item.description}</p>
+              <div key={index} className="border-l-4 border-blue-500 pl-4 flex items-start justify-between">
+                <div className="flex-1">
+                  <h3 className="font-medium text-gray-900">{item.title}</h3>
+                  <p className="text-gray-600 mt-1">{item.description}</p>
+                </div>
+                <button
+                  className="ml-4 p-2 text-gray-400 hover:text-blue-600 hover:bg-blue-50 rounded-full transition-colors"
+                  aria-label="Add to plan"
+                  title="Add to plan"
+                >
+                  <Plus className="h-5 w-5" />
+                </button>
               </div>
             ))}
           </div>
@@ -94,9 +112,18 @@ export default function CarePlanView({ carePlan }: CarePlanViewProps) {
           </div>
           <div className="space-y-4">
             {recommendations.longTerm.map((item, index: number) => (
-              <div key={index} className="border-l-4 border-green-500 pl-4">
-                <h3 className="font-medium text-gray-900">{item.title}</h3>
-                <p className="text-gray-600 mt-1">{item.description}</p>
+              <div key={index} className="border-l-4 border-green-500 pl-4 flex items-start justify-between">
+                <div className="flex-1">
+                  <h3 className="font-medium text-gray-900">{item.title}</h3>
+                  <p className="text-gray-600 mt-1">{item.description}</p>
+                </div>
+                <button
+                  className="ml-4 p-2 text-gray-400 hover:text-blue-600 hover:bg-blue-50 rounded-full transition-colors"
+                  aria-label="Add to plan"
+                  title="Add to plan"
+                >
+                  <Plus className="h-5 w-5" />
+                </button>
               </div>
             ))}
           </div>
@@ -112,9 +139,18 @@ export default function CarePlanView({ carePlan }: CarePlanViewProps) {
           </div>
           <div className="space-y-4">
             {recommendations.resources.map((item, index: number) => (
-              <div key={index} className="border-l-4 border-purple-500 pl-4">
-                <h3 className="font-medium text-gray-900">{item.title}</h3>
-                <p className="text-gray-600 mt-1">{item.description}</p>
+              <div key={index} className="border-l-4 border-purple-500 pl-4 flex items-start justify-between">
+                <div className="flex-1">
+                  <h3 className="font-medium text-gray-900">{item.title}</h3>
+                  <p className="text-gray-600 mt-1">{item.description}</p>
+                </div>
+                <button
+                  className="ml-4 p-2 text-gray-400 hover:text-blue-600 hover:bg-blue-50 rounded-full transition-colors"
+                  aria-label="Add to plan"
+                  title="Add to plan"
+                >
+                  <Plus className="h-5 w-5" />
+                </button>
               </div>
             ))}
           </div>
@@ -129,13 +165,19 @@ export default function CarePlanView({ carePlan }: CarePlanViewProps) {
           <li>Schedule an initial consultation</li>
           <li>Return to update your care plan as your needs evolve</li>
         </ul>
-        <div className="mt-4">
+        <div className="mt-4 flex flex-wrap gap-3">
           <a
             href="/providers"
             className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700"
           >
             Find a Provider
           </a>
+          <button
+            className="inline-flex items-center px-4 py-2 border border-blue-600 text-sm font-medium rounded-md text-blue-600 bg-white hover:bg-blue-50"
+          >
+            <Send className="h-4 w-4 mr-2" />
+            Send Plan to Board
+          </button>
         </div>
       </div>
     </div>
