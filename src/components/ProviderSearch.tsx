@@ -14,13 +14,11 @@ interface ProviderSearchProps {
 export default function ProviderSearch({ initialProviders, userId }: ProviderSearchProps) {
   const [searchTerm, setSearchTerm] = useState('')
   const [selectedSpecialties, setSelectedSpecialties] = useState<string[]>([])
-  const [selectedDurations, setSelectedDurations] = useState<string[]>([])
-  const [selectedDenominations, setSelectedDenominations] = useState<string[]>([])
+  const [selectedDuration, setSelectedDuration] = useState<string>('')
+  const [selectedDenomination, setSelectedDenomination] = useState<string>('')
   const [locationType, setLocationType] = useState<string>('')
   const [glooScholarship, setGlooScholarship] = useState(false)
-  const [contentResources, setContentResources] = useState(false)
-  const [telehealth, setTelehealth] = useState(false)
-  const [faithBased, setFaithBased] = useState(false)
+  const [selectedContentResource, setSelectedContentResource] = useState<string>('')
   const [acceptingClients, setAcceptingClients] = useState(false)
 
   // Get all unique specialties
@@ -32,23 +30,23 @@ export default function ProviderSearch({ initialProviders, userId }: ProviderSea
     return Array.from(specialtiesSet).sort()
   }, [initialProviders])
 
-  // Get all unique service durations
-  const allDurations = useMemo(() => {
-    const durationsSet = new Set<string>()
-    initialProviders.forEach(provider => {
-      provider.service_durations.forEach(duration => durationsSet.add(duration))
-    })
-    return Array.from(durationsSet).sort()
-  }, [initialProviders])
-
-  // Get all unique denominations
-  const allDenominations = useMemo(() => {
-    const denomsSet = new Set<string>()
-    initialProviders.forEach(provider => {
-      provider.denominations.forEach(denom => denomsSet.add(denom))
-    })
-    return Array.from(denomsSet).sort()
-  }, [initialProviders])
+  // Fixed dropdown options
+  const durationOptions = ['Day', 'Weekend', 'Week', 'Year-long']
+  const contentResourceOptions = ['Books', 'Online Courses', 'Podcast']
+  const denominationOptions = [
+    'Catholic',
+    'Pentecostal',
+    'Baptist',
+    'Methodist',
+    'Lutheran',
+    'Presbyterian',
+    'Anglican/Episcopal',
+    'Non-denominational',
+    'Assembly of God',
+    'Church of Christ',
+    'Evangelical',
+    'Reformed'
+  ]
 
   // Filter providers
   const filteredProviders = useMemo(() => {
@@ -64,51 +62,35 @@ export default function ProviderSearch({ initialProviders, userId }: ProviderSea
         selectedSpecialties.some(specialty => provider.specialties.includes(specialty))
 
       // Duration filter
-      const matchesDuration = selectedDurations.length === 0 ||
-        selectedDurations.some(duration => provider.service_durations.includes(duration))
+      const matchesDuration = !selectedDuration ||
+        provider.service_durations.includes(selectedDuration)
 
       // Denomination filter
-      const matchesDenomination = selectedDenominations.length === 0 ||
-        selectedDenominations.some(denom => provider.denominations.includes(denom))
+      const matchesDenomination = !selectedDenomination ||
+        provider.denominations.includes(selectedDenomination)
+
+      // Content resource filter
+      const matchesContentResource = !selectedContentResource ||
+        provider.content_resources_list.includes(selectedContentResource)
 
       // Location type filter
       const matchesLocationType = !locationType || provider.location_type === locationType || provider.location_type === 'both'
 
       // Other filters
       const matchesGloo = !glooScholarship || provider.gloo_scholarship_available
-      const matchesContentResources = !contentResources || provider.content_resources
-      const matchesTelehealth = !telehealth || provider.telehealth_available
-      const matchesFaith = !faithBased || provider.faith_based
       const matchesAccepting = !acceptingClients || provider.accepting_new_clients
 
       return matchesSearch && matchesSpecialty && matchesDuration && matchesDenomination &&
-             matchesLocationType && matchesGloo && matchesContentResources &&
-             matchesTelehealth && matchesFaith && matchesAccepting
+             matchesLocationType && matchesGloo && matchesContentResource && matchesAccepting
     })
-  }, [initialProviders, searchTerm, selectedSpecialties, selectedDurations, selectedDenominations,
-      locationType, glooScholarship, contentResources, telehealth, faithBased, acceptingClients])
+  }, [initialProviders, searchTerm, selectedSpecialties, selectedDuration, selectedDenomination,
+      locationType, glooScholarship, selectedContentResource, acceptingClients])
 
   const toggleSpecialty = (specialty: string) => {
     setSelectedSpecialties(prev =>
       prev.includes(specialty)
         ? prev.filter(s => s !== specialty)
         : [...prev, specialty]
-    )
-  }
-
-  const toggleDuration = (duration: string) => {
-    setSelectedDurations(prev =>
-      prev.includes(duration)
-        ? prev.filter(d => d !== duration)
-        : [...prev, duration]
-    )
-  }
-
-  const toggleDenomination = (denomination: string) => {
-    setSelectedDenominations(prev =>
-      prev.includes(denomination)
-        ? prev.filter(d => d !== denomination)
-        : [...prev, denomination]
     )
   }
 
@@ -161,19 +143,33 @@ export default function ProviderSearch({ initialProviders, userId }: ProviderSea
             <label className="block text-sm font-medium text-gray-700 mb-2">
               Service Duration
             </label>
-            <div className="space-y-2 max-h-48 overflow-y-auto">
-              {allDurations.map(duration => (
-                <label key={duration} className="flex items-center">
-                  <input
-                    type="checkbox"
-                    checked={selectedDurations.includes(duration)}
-                    onChange={() => toggleDuration(duration)}
-                    className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
-                  />
-                  <span className="ml-2 text-sm text-gray-700">{duration}</span>
-                </label>
+            <select
+              value={selectedDuration}
+              onChange={(e) => setSelectedDuration(e.target.value)}
+              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500 text-gray-900"
+            >
+              <option value="">All</option>
+              {durationOptions.map(duration => (
+                <option key={duration} value={duration}>{duration}</option>
               ))}
-            </div>
+            </select>
+          </div>
+
+          {/* Content Resources */}
+          <div className="mb-6">
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              Content Resources
+            </label>
+            <select
+              value={selectedContentResource}
+              onChange={(e) => setSelectedContentResource(e.target.value)}
+              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500 text-gray-900"
+            >
+              <option value="">All</option>
+              {contentResourceOptions.map(resource => (
+                <option key={resource} value={resource}>{resource}</option>
+              ))}
+            </select>
           </div>
 
           {/* Denominations */}
@@ -181,19 +177,16 @@ export default function ProviderSearch({ initialProviders, userId }: ProviderSea
             <label className="block text-sm font-medium text-gray-700 mb-2">
               Denominations/Theology
             </label>
-            <div className="space-y-2 max-h-48 overflow-y-auto">
-              {allDenominations.map(denomination => (
-                <label key={denomination} className="flex items-center">
-                  <input
-                    type="checkbox"
-                    checked={selectedDenominations.includes(denomination)}
-                    onChange={() => toggleDenomination(denomination)}
-                    className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
-                  />
-                  <span className="ml-2 text-sm text-gray-700">{denomination}</span>
-                </label>
+            <select
+              value={selectedDenomination}
+              onChange={(e) => setSelectedDenomination(e.target.value)}
+              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500 text-gray-900"
+            >
+              <option value="">All</option>
+              {denominationOptions.map(denomination => (
+                <option key={denomination} value={denomination}>{denomination}</option>
               ))}
-            </div>
+            </select>
           </div>
 
           {/* Location Type */}
@@ -218,26 +211,6 @@ export default function ProviderSearch({ initialProviders, userId }: ProviderSea
             <label className="flex items-center">
               <input
                 type="checkbox"
-                checked={telehealth}
-                onChange={(e) => setTelehealth(e.target.checked)}
-                className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
-              />
-              <span className="ml-2 text-sm text-gray-700">Telehealth Available</span>
-            </label>
-
-            <label className="flex items-center">
-              <input
-                type="checkbox"
-                checked={faithBased}
-                onChange={(e) => setFaithBased(e.target.checked)}
-                className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
-              />
-              <span className="ml-2 text-sm text-gray-700">Faith-Based</span>
-            </label>
-
-            <label className="flex items-center">
-              <input
-                type="checkbox"
                 checked={acceptingClients}
                 onChange={(e) => setAcceptingClients(e.target.checked)}
                 className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
@@ -253,16 +226,6 @@ export default function ProviderSearch({ initialProviders, userId }: ProviderSea
                 className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
               />
               <span className="ml-2 text-sm text-gray-700">Gloo Impact Scholarships</span>
-            </label>
-
-            <label className="flex items-center">
-              <input
-                type="checkbox"
-                checked={contentResources}
-                onChange={(e) => setContentResources(e.target.checked)}
-                className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
-              />
-              <span className="ml-2 text-sm text-gray-700">Content Resources Available</span>
             </label>
           </div>
         </div>
@@ -371,16 +334,6 @@ export default function ProviderSearch({ initialProviders, userId }: ProviderSea
                         {provider.location_type === 'in-person' ? 'In-Person' : provider.location_type === 'virtual' ? 'Virtual' : 'In-Person & Virtual'}
                       </span>
                     )}
-                    {provider.telehealth_available && (
-                      <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">
-                        Telehealth
-                      </span>
-                    )}
-                    {provider.faith_based && (
-                      <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-purple-100 text-purple-800">
-                        Faith-Based
-                      </span>
-                    )}
                     {provider.accepting_new_clients && (
                       <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
                         Accepting New Clients
@@ -419,13 +372,11 @@ export default function ProviderSearch({ initialProviders, userId }: ProviderSea
                 onClick={() => {
                   setSearchTerm('')
                   setSelectedSpecialties([])
-                  setSelectedDurations([])
-                  setSelectedDenominations([])
+                  setSelectedDuration('')
+                  setSelectedDenomination('')
+                  setSelectedContentResource('')
                   setLocationType('')
                   setGlooScholarship(false)
-                  setContentResources(false)
-                  setTelehealth(false)
-                  setFaithBased(false)
                   setAcceptingClients(false)
                 }}
                 className="mt-4 text-blue-600 hover:text-blue-800"

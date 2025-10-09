@@ -61,8 +61,6 @@ export interface Database {
           zip_code: string | null
           insurance_accepted: string[]
           accepting_new_clients: boolean
-          telehealth_available: boolean
-          faith_based: boolean
           languages: string[]
           rating: number
           review_count: number
@@ -92,8 +90,6 @@ export interface Database {
           zip_code?: string | null
           insurance_accepted?: string[]
           accepting_new_clients?: boolean
-          telehealth_available?: boolean
-          faith_based?: boolean
           languages?: string[]
           rating?: number
           review_count?: number
@@ -123,8 +119,6 @@ export interface Database {
           zip_code?: string | null
           insurance_accepted?: string[]
           accepting_new_clients?: boolean
-          telehealth_available?: boolean
-          faith_based?: boolean
           languages?: string[]
           rating?: number
           review_count?: number

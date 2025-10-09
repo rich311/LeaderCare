@@ -31,8 +31,6 @@ create table public.providers (
   zip_code text,
   insurance_accepted text[] default '{}',
   accepting_new_clients boolean default true,
-  telehealth_available boolean default false,
-  faith_based boolean default false,
   languages text[] default '{"English"}',
   rating numeric(3,2) default 0,
   review_count integer default 0,
