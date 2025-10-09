@@ -36,6 +36,13 @@ create table public.providers (
   languages text[] default '{"English"}',
   rating numeric(3,2) default 0,
   review_count integer default 0,
+  location_type text check (location_type in ('in-person', 'virtual', 'both')) default 'both',
+  location_details text,
+  gloo_scholarship_available boolean default false,
+  service_durations text[] default '{}',
+  content_resources boolean default false,
+  content_resources_list text[] default '{}',
+  denominations text[] default '{}',
   created_at timestamp with time zone default timezone('utc'::text, now()) not null,
   updated_at timestamp with time zone default timezone('utc'::text, now()) not null
 );

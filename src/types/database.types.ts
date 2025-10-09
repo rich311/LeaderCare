@@ -66,6 +66,13 @@ export interface Database {
           languages: string[]
           rating: number
           review_count: number
+          location_type: 'in-person' | 'virtual' | 'both'
+          location_details: string | null
+          gloo_scholarship_available: boolean
+          service_durations: string[]
+          content_resources: boolean
+          content_resources_list: string[]
+          denominations: string[]
           created_at: string
           updated_at: string
         }
@@ -90,6 +97,13 @@ export interface Database {
           languages?: string[]
           rating?: number
           review_count?: number
+          location_type?: 'in-person' | 'virtual' | 'both'
+          location_details?: string | null
+          gloo_scholarship_available?: boolean
+          service_durations?: string[]
+          content_resources?: boolean
+          content_resources_list?: string[]
+          denominations?: string[]
           created_at?: string
           updated_at?: string
         }
@@ -114,6 +128,13 @@ export interface Database {
           languages?: string[]
           rating?: number
           review_count?: number
+          location_type?: 'in-person' | 'virtual' | 'both'
+          location_details?: string | null
+          gloo_scholarship_available?: boolean
+          service_durations?: string[]
+          content_resources?: boolean
+          content_resources_list?: string[]
+          denominations?: string[]
           created_at?: string
           updated_at?: string
         }

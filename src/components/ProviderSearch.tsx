@@ -14,6 +14,11 @@ interface ProviderSearchProps {
 export default function ProviderSearch({ initialProviders, userId }: ProviderSearchProps) {
   const [searchTerm, setSearchTerm] = useState('')
   const [selectedSpecialties, setSelectedSpecialties] = useState<string[]>([])
+  const [selectedDurations, setSelectedDurations] = useState<string[]>([])
+  const [selectedDenominations, setSelectedDenominations] = useState<string[]>([])
+  const [locationType, setLocationType] = useState<string>('')
+  const [glooScholarship, setGlooScholarship] = useState(false)
+  const [contentResources, setContentResources] = useState(false)
   const [telehealth, setTelehealth] = useState(false)
   const [faithBased, setFaithBased] = useState(false)
   const [acceptingClients, setAcceptingClients] = useState(false)
@@ -25,6 +30,24 @@ export default function ProviderSearch({ initialProviders, userId }: ProviderSea
       provider.specialties.forEach(specialty => specialtiesSet.add(specialty))
     })
     return Array.from(specialtiesSet).sort()
+  }, [initialProviders])
+
+  // Get all unique service durations
+  const allDurations = useMemo(() => {
+    const durationsSet = new Set<string>()
+    initialProviders.forEach(provider => {
+      provider.service_durations.forEach(duration => durationsSet.add(duration))
+    })
+    return Array.from(durationsSet).sort()
+  }, [initialProviders])
+
+  // Get all unique denominations
+  const allDenominations = useMemo(() => {
+    const denomsSet = new Set<string>()
+    initialProviders.forEach(provider => {
+      provider.denominations.forEach(denom => denomsSet.add(denom))
+    })
+    return Array.from(denomsSet).sort()
   }, [initialProviders])
 
   // Filter providers
@@ -40,20 +63,52 @@ export default function ProviderSearch({ initialProviders, userId }: ProviderSea
       const matchesSpecialty = selectedSpecialties.length === 0 ||
         selectedSpecialties.some(specialty => provider.specialties.includes(specialty))
 
+      // Duration filter
+      const matchesDuration = selectedDurations.length === 0 ||
+        selectedDurations.some(duration => provider.service_durations.includes(duration))
+
+      // Denomination filter
+      const matchesDenomination = selectedDenominations.length === 0 ||
+        selectedDenominations.some(denom => provider.denominations.includes(denom))
+
+      // Location type filter
+      const matchesLocationType = !locationType || provider.location_type === locationType || provider.location_type === 'both'
+
       // Other filters
+      const matchesGloo = !glooScholarship || provider.gloo_scholarship_available
+      const matchesContentResources = !contentResources || provider.content_resources
       const matchesTelehealth = !telehealth || provider.telehealth_available
       const matchesFaith = !faithBased || provider.faith_based
       const matchesAccepting = !acceptingClients || provider.accepting_new_clients
 
-      return matchesSearch && matchesSpecialty && matchesTelehealth && matchesFaith && matchesAccepting
+      return matchesSearch && matchesSpecialty && matchesDuration && matchesDenomination &&
+             matchesLocationType && matchesGloo && matchesContentResources &&
+             matchesTelehealth && matchesFaith && matchesAccepting
     })
-  }, [initialProviders, searchTerm, selectedSpecialties, telehealth, faithBased, acceptingClients])
+  }, [initialProviders, searchTerm, selectedSpecialties, selectedDurations, selectedDenominations,
+      locationType, glooScholarship, contentResources, telehealth, faithBased, acceptingClients])
 
   const toggleSpecialty = (specialty: string) => {
     setSelectedSpecialties(prev =>
       prev.includes(specialty)
         ? prev.filter(s => s !== specialty)
         : [...prev, specialty]
+    )
+  }
+
+  const toggleDuration = (duration: string) => {
+    setSelectedDurations(prev =>
+      prev.includes(duration)
+        ? prev.filter(d => d !== duration)
+        : [...prev, duration]
+    )
+  }
+
+  const toggleDenomination = (denomination: string) => {
+    setSelectedDenominations(prev =>
+      prev.includes(denomination)
+        ? prev.filter(d => d !== denomination)
+        : [...prev, denomination]
     )
   }
 
@@ -101,6 +156,63 @@ export default function ProviderSearch({ initialProviders, userId }: ProviderSea
             </div>
           </div>
 
+          {/* Service Durations */}
+          <div className="mb-6">
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              Service Duration
+            </label>
+            <div className="space-y-2 max-h-48 overflow-y-auto">
+              {allDurations.map(duration => (
+                <label key={duration} className="flex items-center">
+                  <input
+                    type="checkbox"
+                    checked={selectedDurations.includes(duration)}
+                    onChange={() => toggleDuration(duration)}
+                    className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+                  />
+                  <span className="ml-2 text-sm text-gray-700">{duration}</span>
+                </label>
+              ))}
+            </div>
+          </div>
+
+          {/* Denominations */}
+          <div className="mb-6">
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              Denominations/Theology
+            </label>
+            <div className="space-y-2 max-h-48 overflow-y-auto">
+              {allDenominations.map(denomination => (
+                <label key={denomination} className="flex items-center">
+                  <input
+                    type="checkbox"
+                    checked={selectedDenominations.includes(denomination)}
+                    onChange={() => toggleDenomination(denomination)}
+                    className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+                  />
+                  <span className="ml-2 text-sm text-gray-700">{denomination}</span>
+                </label>
+              ))}
+            </div>
+          </div>
+
+          {/* Location Type */}
+          <div className="mb-6">
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              Location Type
+            </label>
+            <select
+              value={locationType}
+              onChange={(e) => setLocationType(e.target.value)}
+              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500 text-gray-900"
+            >
+              <option value="">All</option>
+              <option value="in-person">In-Person</option>
+              <option value="virtual">Virtual</option>
+              <option value="both">Both</option>
+            </select>
+          </div>
+
           {/* Other Filters */}
           <div className="space-y-3">
             <label className="flex items-center">
@@ -131,6 +243,26 @@ export default function ProviderSearch({ initialProviders, userId }: ProviderSea
                 className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
               />
               <span className="ml-2 text-sm text-gray-700">Accepting New Clients</span>
+            </label>
+
+            <label className="flex items-center">
+              <input
+                type="checkbox"
+                checked={glooScholarship}
+                onChange={(e) => setGlooScholarship(e.target.checked)}
+                className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+              />
+              <span className="ml-2 text-sm text-gray-700">Gloo Impact Scholarships</span>
+            </label>
+
+            <label className="flex items-center">
+              <input
+                type="checkbox"
+                checked={contentResources}
+                onChange={(e) => setContentResources(e.target.checked)}
+                className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+              />
+              <span className="ml-2 text-sm text-gray-700">Content Resources Available</span>
             </label>
           </div>
         </div>
@@ -178,6 +310,22 @@ export default function ProviderSearch({ initialProviders, userId }: ProviderSea
                     </div>
                   )}
 
+                  {/* Service Durations */}
+                  {provider.service_durations.length > 0 && (
+                    <div className="mt-3">
+                      <span className="text-sm font-medium text-gray-700">Service Durations: </span>
+                      <span className="text-sm text-gray-600">{provider.service_durations.join(', ')}</span>
+                    </div>
+                  )}
+
+                  {/* Denominations */}
+                  {provider.denominations.length > 0 && (
+                    <div className="mt-2">
+                      <span className="text-sm font-medium text-gray-700">Denominations: </span>
+                      <span className="text-sm text-gray-600">{provider.denominations.join(', ')}</span>
+                    </div>
+                  )}
+
                   {/* Bio */}
                   {provider.bio && (
                     <p className="mt-3 text-gray-600 line-clamp-3">{provider.bio}</p>
@@ -218,6 +366,11 @@ export default function ProviderSearch({ initialProviders, userId }: ProviderSea
 
                   {/* Badges */}
                   <div className="mt-4 flex flex-wrap gap-3">
+                    {provider.location_type && (
+                      <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-indigo-100 text-indigo-800">
+                        {provider.location_type === 'in-person' ? 'In-Person' : provider.location_type === 'virtual' ? 'Virtual' : 'In-Person & Virtual'}
+                      </span>
+                    )}
                     {provider.telehealth_available && (
                       <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">
                         Telehealth
@@ -231,6 +384,16 @@ export default function ProviderSearch({ initialProviders, userId }: ProviderSea
                     {provider.accepting_new_clients && (
                       <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
                         Accepting New Clients
+                      </span>
+                    )}
+                    {provider.gloo_scholarship_available && (
+                      <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
+                        Gloo Impact Scholarships
+                      </span>
+                    )}
+                    {provider.content_resources && (
+                      <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-pink-100 text-pink-800">
+                        Content Resources
                       </span>
                     )}
                   </div>
@@ -256,6 +419,11 @@ export default function ProviderSearch({ initialProviders, userId }: ProviderSea
                 onClick={() => {
                   setSearchTerm('')
                   setSelectedSpecialties([])
+                  setSelectedDurations([])
+                  setSelectedDenominations([])
+                  setLocationType('')
+                  setGlooScholarship(false)
+                  setContentResources(false)
                   setTelehealth(false)
                   setFaithBased(false)
                   setAcceptingClients(false)
