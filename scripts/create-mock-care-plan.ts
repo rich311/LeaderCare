@@ -49,83 +49,98 @@ const recommendations = {
     {
       title: 'Schedule Rest and Recovery',
       description: 'Take immediate time off (at least 3-5 days) to rest and disconnect from ministry responsibilities. This is crucial given your high stress level.',
-      priority: 'urgent'
+      priority: 'urgent',
+      estimatedCost: 0
     },
     {
       title: 'Sleep Hygiene Assessment',
       description: 'Consult with a healthcare provider about your poor sleep quality. Consider a sleep study if insomnia persists.',
-      priority: 'urgent'
+      priority: 'urgent',
+      estimatedCost: 250
     },
     {
       title: 'Crisis Support Check-in',
       description: 'Given your stress level (8/10), connect with a licensed therapist who specializes in clergy burnout within the next week.',
-      priority: 'urgent'
+      priority: 'urgent',
+      estimatedCost: 150
     }
   ],
   shortTerm: [
     {
       title: 'Begin Weekly Therapy',
       description: 'Start weekly sessions with a therapist who specializes in ministry burnout and compassion fatigue. Faith-integrated therapy is recommended given your preferences.',
-      priority: 'high'
+      priority: 'high',
+      estimatedCost: 600
     },
     {
       title: 'Attend a Ministry Leader Retreat',
       description: 'Participate in a weekend retreat specifically designed for church leaders focusing on restoration, boundaries, and sustainable ministry.',
-      priority: 'high'
+      priority: 'high',
+      estimatedCost: 800
     },
     {
       title: 'Establish Daily Boundaries',
       description: 'Create clear boundaries around work hours, including designated "off" times when you do not respond to ministry needs except for true emergencies.',
-      priority: 'high'
+      priority: 'high',
+      estimatedCost: 0
     },
     {
       title: 'Physical Health Baseline',
       description: 'Schedule a complete physical exam to rule out any underlying health issues contributing to fatigue and poor sleep.',
-      priority: 'medium'
+      priority: 'medium',
+      estimatedCost: 200
     }
   ],
   longTerm: [
     {
       title: 'Develop Sabbath Rhythms',
       description: 'Implement regular sabbath practices - weekly rest days and quarterly extended rest periods (3-4 days) away from ministry.',
-      priority: 'medium'
+      priority: 'medium',
+      estimatedCost: 0
     },
     {
       title: 'Build Peer Support Network',
       description: 'Join or form a peer support group with other ministry leaders who can provide mutual encouragement and accountability.',
-      priority: 'medium'
+      priority: 'medium',
+      estimatedCost: 0
     },
     {
       title: 'Spiritual Direction',
       description: 'Engage in regular spiritual direction (monthly) separate from ministry responsibilities to nurture your personal relationship with God.',
-      priority: 'medium'
+      priority: 'medium',
+      estimatedCost: 400
     },
     {
       title: 'Leadership Coaching',
       description: 'Work with an executive coach who specializes in ministry leadership to develop sustainable leadership practices and delegation skills.',
-      priority: 'low'
+      priority: 'low',
+      estimatedCost: 1200
     }
   ],
   resources: [
     {
       title: 'Recommended Providers',
       description: 'Connect with licensed therapists who specialize in clergy care and understand the unique pressures of ministry leadership. Look for providers offering faith-integrated care.',
-      priority: 'high'
+      priority: 'high',
+      estimatedCost: 0
     },
     {
       title: 'Retreat Centers',
       description: 'Explore retreat centers that offer programs specifically for church leaders and ministry professionals.',
-      priority: 'medium'
+      priority: 'medium',
+      estimatedCost: 0
     },
     {
       title: 'Reading Resources',
       description: 'Books: "The Emotionally Healthy Leader" by Peter Scazzero, "Strengthening the Soul of Your Leadership" by Ruth Haley Barton, "Boundaries for Leaders" by Henry Cloud',
-      priority: 'low'
+      priority: 'low',
+      estimatedCost: 60
     },
     {
       title: 'Online Courses',
       description: 'Consider online courses on self-care for ministry leaders, emotional intelligence, and sustainable leadership practices.',
-      priority: 'low'
+      priority: 'low',
+      estimatedCost: 150
     }
   ]
 }
