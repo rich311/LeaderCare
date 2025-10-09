@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useMemo } from 'react'
-import { AlertCircle, CheckCircle, Clock, Heart, Plus, X, Send } from 'lucide-react'
+import { AlertCircle, CheckCircle, Clock, Heart, Plus, X, Send, Download } from 'lucide-react'
 import type { Database } from '@/types/database.types'
 
 type CarePlan = Database['public']['Tables']['care_plans']['Row']
@@ -28,6 +28,9 @@ export default function CarePlanView({ carePlan }: CarePlanViewProps) {
   const recommendations = carePlan.recommendations as Recommendations
   const [selectedItems, setSelectedItems] = useState<Set<string>>(new Set())
   const [showPopup, setShowPopup] = useState(false)
+  const [customItems, setCustomItems] = useState<Array<{description: string, cost: number}>>([])
+  const [customDescription, setCustomDescription] = useState('')
+  const [customCost, setCustomCost] = useState('')
 
   const toggleItem = (category: string, index: number) => {
     const key = `${category}-${index}`
@@ -63,8 +66,13 @@ export default function CarePlanView({ carePlan }: CarePlanViewProps) {
       })
     })
 
+    // Add custom items to total
+    customItems.forEach(item => {
+      total += item.cost
+    })
+
     return total
-  }, [selectedItems, recommendations])
+  }, [selectedItems, recommendations, customItems])
 
   const handleSendToBoard = () => {
     setShowPopup(true)
@@ -72,6 +80,21 @@ export default function CarePlanView({ carePlan }: CarePlanViewProps) {
     setTimeout(() => {
       setShowPopup(false)
     }, 5000)
+  }
+
+  const handleAddCustomItem = () => {
+    if (customDescription.trim() && customCost) {
+      const cost = parseFloat(customCost)
+      if (!isNaN(cost) && cost >= 0) {
+        setCustomItems([...customItems, { description: customDescription.trim(), cost }])
+        setCustomDescription('')
+        setCustomCost('')
+      }
+    }
+  }
+
+  const handleRemoveCustomItem = (index: number) => {
+    setCustomItems(customItems.filter((_, i) => i !== index))
   }
 
   const getPriorityColor = (priority: string) => {
@@ -93,9 +116,28 @@ export default function CarePlanView({ carePlan }: CarePlanViewProps) {
             {carePlan.priority_level.toUpperCase()} Priority
           </span>
         </div>
-        <p className="text-gray-600">
+        <p className="text-gray-600 mb-4">
           Created on {new Date(carePlan.created_at).toLocaleDateString()}
         </p>
+
+        {/* Instructions */}
+        <div className="bg-blue-50 border-l-4 border-blue-600 p-4 rounded">
+          <div className="flex">
+            <div className="flex-shrink-0">
+              <Plus className="h-5 w-5 text-blue-600" />
+            </div>
+            <div className="ml-3">
+              <h3 className="text-sm font-bold text-blue-900 mb-1">
+                Build Your Care Plan
+              </h3>
+              <p className="text-sm text-blue-800">
+                Click the <strong>+ button</strong> next to any recommendation to add it to your plan.
+                Selected items will be highlighted and counted in your budget total below.
+                You can also add your own custom items at the bottom of the page.
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
 
       {/* Immediate Actions */}
@@ -123,15 +165,24 @@ export default function CarePlanView({ carePlan }: CarePlanViewProps) {
                   </div>
                   <button
                     onClick={() => toggleItem('immediate', index)}
-                    className={`ml-4 p-2 rounded-full transition-colors ${
+                    className={`ml-4 p-3 rounded-lg transition-all font-medium text-sm min-w-[100px] ${
                       isSelected
-                        ? 'bg-blue-600 text-white hover:bg-blue-700'
-                        : 'text-gray-400 hover:text-blue-600 hover:bg-blue-50'
+                        ? 'bg-blue-600 text-white hover:bg-blue-700 shadow-md'
+                        : 'bg-blue-50 text-blue-600 hover:bg-blue-100 border-2 border-blue-600'
                     }`}
                     aria-label={isSelected ? "Remove from plan" : "Add to plan"}
-                    title={isSelected ? "Remove from plan" : "Add to plan"}
                   >
-                    {isSelected ? <X className="h-5 w-5" /> : <Plus className="h-5 w-5" />}
+                    {isSelected ? (
+                      <span className="flex items-center justify-center gap-1">
+                        <X className="h-4 w-4" />
+                        Remove
+                      </span>
+                    ) : (
+                      <span className="flex items-center justify-center gap-1">
+                        <Plus className="h-4 w-4" />
+                        Add
+                      </span>
+                    )}
                   </button>
                 </div>
               )
@@ -165,15 +216,24 @@ export default function CarePlanView({ carePlan }: CarePlanViewProps) {
                   </div>
                   <button
                     onClick={() => toggleItem('shortTerm', index)}
-                    className={`ml-4 p-2 rounded-full transition-colors ${
+                    className={`ml-4 p-3 rounded-lg transition-all font-medium text-sm min-w-[100px] ${
                       isSelected
-                        ? 'bg-blue-600 text-white hover:bg-blue-700'
-                        : 'text-gray-400 hover:text-blue-600 hover:bg-blue-50'
+                        ? 'bg-blue-600 text-white hover:bg-blue-700 shadow-md'
+                        : 'bg-blue-50 text-blue-600 hover:bg-blue-100 border-2 border-blue-600'
                     }`}
                     aria-label={isSelected ? "Remove from plan" : "Add to plan"}
-                    title={isSelected ? "Remove from plan" : "Add to plan"}
                   >
-                    {isSelected ? <X className="h-5 w-5" /> : <Plus className="h-5 w-5" />}
+                    {isSelected ? (
+                      <span className="flex items-center justify-center gap-1">
+                        <X className="h-4 w-4" />
+                        Remove
+                      </span>
+                    ) : (
+                      <span className="flex items-center justify-center gap-1">
+                        <Plus className="h-4 w-4" />
+                        Add
+                      </span>
+                    )}
                   </button>
                 </div>
               )
@@ -207,15 +267,24 @@ export default function CarePlanView({ carePlan }: CarePlanViewProps) {
                   </div>
                   <button
                     onClick={() => toggleItem('longTerm', index)}
-                    className={`ml-4 p-2 rounded-full transition-colors ${
+                    className={`ml-4 p-3 rounded-lg transition-all font-medium text-sm min-w-[100px] ${
                       isSelected
-                        ? 'bg-blue-600 text-white hover:bg-blue-700'
-                        : 'text-gray-400 hover:text-blue-600 hover:bg-blue-50'
+                        ? 'bg-blue-600 text-white hover:bg-blue-700 shadow-md'
+                        : 'bg-blue-50 text-blue-600 hover:bg-blue-100 border-2 border-blue-600'
                     }`}
                     aria-label={isSelected ? "Remove from plan" : "Add to plan"}
-                    title={isSelected ? "Remove from plan" : "Add to plan"}
                   >
-                    {isSelected ? <X className="h-5 w-5" /> : <Plus className="h-5 w-5" />}
+                    {isSelected ? (
+                      <span className="flex items-center justify-center gap-1">
+                        <X className="h-4 w-4" />
+                        Remove
+                      </span>
+                    ) : (
+                      <span className="flex items-center justify-center gap-1">
+                        <Plus className="h-4 w-4" />
+                        Add
+                      </span>
+                    )}
                   </button>
                 </div>
               )
@@ -249,15 +318,24 @@ export default function CarePlanView({ carePlan }: CarePlanViewProps) {
                   </div>
                   <button
                     onClick={() => toggleItem('resources', index)}
-                    className={`ml-4 p-2 rounded-full transition-colors ${
+                    className={`ml-4 p-3 rounded-lg transition-all font-medium text-sm min-w-[100px] ${
                       isSelected
-                        ? 'bg-blue-600 text-white hover:bg-blue-700'
-                        : 'text-gray-400 hover:text-blue-600 hover:bg-blue-50'
+                        ? 'bg-blue-600 text-white hover:bg-blue-700 shadow-md'
+                        : 'bg-blue-50 text-blue-600 hover:bg-blue-100 border-2 border-blue-600'
                     }`}
                     aria-label={isSelected ? "Remove from plan" : "Add to plan"}
-                    title={isSelected ? "Remove from plan" : "Add to plan"}
                   >
-                    {isSelected ? <X className="h-5 w-5" /> : <Plus className="h-5 w-5" />}
+                    {isSelected ? (
+                      <span className="flex items-center justify-center gap-1">
+                        <X className="h-4 w-4" />
+                        Remove
+                      </span>
+                    ) : (
+                      <span className="flex items-center justify-center gap-1">
+                        <Plus className="h-4 w-4" />
+                        Add
+                      </span>
+                    )}
                   </button>
                 </div>
               )
@@ -266,14 +344,85 @@ export default function CarePlanView({ carePlan }: CarePlanViewProps) {
         </div>
       )}
 
+      {/* Custom Items Section */}
+      <div className="bg-white rounded-lg shadow p-6">
+        <div className="flex items-center mb-4">
+          <Plus className="h-6 w-6 text-gray-600 mr-2" />
+          <h2 className="text-xl font-semibold text-gray-900">Add Your Own Items</h2>
+        </div>
+
+        {/* Display existing custom items */}
+        {customItems.length > 0 && (
+          <div className="space-y-3 mb-6">
+            {customItems.map((item, index) => (
+              <div key={index} className="border-l-4 border-gray-500 pl-4 flex items-start justify-between bg-gray-50 rounded-r p-3">
+                <div className="flex-1">
+                  <div className="flex items-center gap-2">
+                    <h3 className="font-medium text-gray-900">{item.description}</h3>
+                    <span className="text-sm font-semibold text-green-700">
+                      ${item.cost.toLocaleString()}
+                    </span>
+                  </div>
+                </div>
+                <button
+                  onClick={() => handleRemoveCustomItem(index)}
+                  className="ml-4 p-2 rounded-lg bg-red-50 text-red-600 hover:bg-red-100 border border-red-600 transition-colors"
+                  aria-label="Remove custom item"
+                >
+                  <X className="h-4 w-4" />
+                </button>
+              </div>
+            ))}
+          </div>
+        )}
+
+        {/* Input form for new custom item */}
+        <div className="space-y-3">
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              Item Description
+            </label>
+            <input
+              type="text"
+              value={customDescription}
+              onChange={(e) => setCustomDescription(e.target.value)}
+              placeholder="e.g., Additional therapy sessions"
+              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              Estimated Cost ($)
+            </label>
+            <input
+              type="number"
+              value={customCost}
+              onChange={(e) => setCustomCost(e.target.value)}
+              placeholder="0.00"
+              min="0"
+              step="0.01"
+              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+          </div>
+          <button
+            onClick={handleAddCustomItem}
+            disabled={!customDescription.trim() || !customCost}
+            className="w-full py-3 px-4 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors flex items-center justify-center gap-2"
+          >
+            <Plus className="h-5 w-5" />
+            Add Custom Item
+          </button>
+        </div>
+      </div>
+
       {/* Budget Total */}
-      {selectedItems.size > 0 && (
+      {(selectedItems.size > 0 || customItems.length > 0) && (
         <div className="bg-green-50 rounded-lg p-6 border border-green-200">
           <div className="flex items-center justify-between">
             <div>
               <h3 className="font-semibold text-green-900 text-lg">Budget Total</h3>
               <p className="text-sm text-green-700 mt-1">
-                {selectedItems.size} {selectedItems.size === 1 ? 'item' : 'items'} selected
+                {selectedItems.size + customItems.length} {selectedItems.size + customItems.length === 1 ? 'item' : 'items'} selected
               </p>
             </div>
             <div className="text-right">
@@ -307,6 +456,13 @@ export default function CarePlanView({ carePlan }: CarePlanViewProps) {
           >
             <Send className="h-4 w-4 mr-2" />
             Send Plan to Board
+          </button>
+          <button
+            onClick={() => window.print()}
+            className="inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50"
+          >
+            <Download className="h-4 w-4 mr-2" />
+            Download PDF
           </button>
         </div>
       </div>
