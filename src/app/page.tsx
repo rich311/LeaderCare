@@ -20,7 +20,7 @@ export default async function Home() {
               <span className="block text-blue-600">Ministry Leaders</span>
             </h1>
             <p className="mt-6 max-w-2xl mx-auto text-xl text-gray-500">
-              AI-generated personalized care plans specifically for ministry leaders.
+              AI-generated personalized care plans specifically for leaders who serve.
             </p>
             <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
               <Link
