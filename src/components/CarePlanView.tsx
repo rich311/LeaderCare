@@ -31,6 +31,7 @@ export default function CarePlanView({ carePlan }: CarePlanViewProps) {
   const [customItems, setCustomItems] = useState<Array<{description: string, cost: number}>>([])
   const [customDescription, setCustomDescription] = useState('')
   const [customCost, setCustomCost] = useState('')
+  const [planSent, setPlanSent] = useState(false)
 
   const toggleItem = (category: string, index: number) => {
     const key = `${category}-${index}`
@@ -75,6 +76,7 @@ export default function CarePlanView({ carePlan }: CarePlanViewProps) {
   }, [selectedItems, recommendations, customItems])
 
   const handleSendToBoard = () => {
+    setPlanSent(true)
     setShowPopup(true)
     // Auto-hide popup after 5 seconds
     setTimeout(() => {
@@ -165,18 +167,15 @@ export default function CarePlanView({ carePlan }: CarePlanViewProps) {
                   </div>
                   <button
                     onClick={() => toggleItem('immediate', index)}
-                    className={`ml-4 p-3 rounded-lg transition-all font-medium text-sm min-w-[100px] ${
+                    className={`ml-4 transition-all ${
                       isSelected
-                        ? 'bg-blue-600 text-white hover:bg-blue-700 shadow-md'
-                        : 'bg-blue-50 text-blue-600 hover:bg-blue-100 border-2 border-blue-600'
+                        ? 'p-2 rounded-lg bg-red-50 text-red-600 hover:bg-red-100 border border-red-600'
+                        : 'p-3 rounded-lg font-medium text-sm min-w-[100px] bg-blue-50 text-blue-600 hover:bg-blue-100 border-2 border-blue-600'
                     }`}
                     aria-label={isSelected ? "Remove from plan" : "Add to plan"}
                   >
                     {isSelected ? (
-                      <span className="flex items-center justify-center gap-1">
-                        <X className="h-4 w-4" />
-                        Remove
-                      </span>
+                      <X className="h-4 w-4" />
                     ) : (
                       <span className="flex items-center justify-center gap-1">
                         <Plus className="h-4 w-4" />
@@ -216,18 +215,15 @@ export default function CarePlanView({ carePlan }: CarePlanViewProps) {
                   </div>
                   <button
                     onClick={() => toggleItem('shortTerm', index)}
-                    className={`ml-4 p-3 rounded-lg transition-all font-medium text-sm min-w-[100px] ${
+                    className={`ml-4 transition-all ${
                       isSelected
-                        ? 'bg-blue-600 text-white hover:bg-blue-700 shadow-md'
-                        : 'bg-blue-50 text-blue-600 hover:bg-blue-100 border-2 border-blue-600'
+                        ? 'p-2 rounded-lg bg-red-50 text-red-600 hover:bg-red-100 border border-red-600'
+                        : 'p-3 rounded-lg font-medium text-sm min-w-[100px] bg-blue-50 text-blue-600 hover:bg-blue-100 border-2 border-blue-600'
                     }`}
                     aria-label={isSelected ? "Remove from plan" : "Add to plan"}
                   >
                     {isSelected ? (
-                      <span className="flex items-center justify-center gap-1">
-                        <X className="h-4 w-4" />
-                        Remove
-                      </span>
+                      <X className="h-4 w-4" />
                     ) : (
                       <span className="flex items-center justify-center gap-1">
                         <Plus className="h-4 w-4" />
@@ -267,18 +263,15 @@ export default function CarePlanView({ carePlan }: CarePlanViewProps) {
                   </div>
                   <button
                     onClick={() => toggleItem('longTerm', index)}
-                    className={`ml-4 p-3 rounded-lg transition-all font-medium text-sm min-w-[100px] ${
+                    className={`ml-4 transition-all ${
                       isSelected
-                        ? 'bg-blue-600 text-white hover:bg-blue-700 shadow-md'
-                        : 'bg-blue-50 text-blue-600 hover:bg-blue-100 border-2 border-blue-600'
+                        ? 'p-2 rounded-lg bg-red-50 text-red-600 hover:bg-red-100 border border-red-600'
+                        : 'p-3 rounded-lg font-medium text-sm min-w-[100px] bg-blue-50 text-blue-600 hover:bg-blue-100 border-2 border-blue-600'
                     }`}
                     aria-label={isSelected ? "Remove from plan" : "Add to plan"}
                   >
                     {isSelected ? (
-                      <span className="flex items-center justify-center gap-1">
-                        <X className="h-4 w-4" />
-                        Remove
-                      </span>
+                      <X className="h-4 w-4" />
                     ) : (
                       <span className="flex items-center justify-center gap-1">
                         <Plus className="h-4 w-4" />
@@ -318,18 +311,15 @@ export default function CarePlanView({ carePlan }: CarePlanViewProps) {
                   </div>
                   <button
                     onClick={() => toggleItem('resources', index)}
-                    className={`ml-4 p-3 rounded-lg transition-all font-medium text-sm min-w-[100px] ${
+                    className={`ml-4 transition-all ${
                       isSelected
-                        ? 'bg-blue-600 text-white hover:bg-blue-700 shadow-md'
-                        : 'bg-blue-50 text-blue-600 hover:bg-blue-100 border-2 border-blue-600'
+                        ? 'p-2 rounded-lg bg-red-50 text-red-600 hover:bg-red-100 border border-red-600'
+                        : 'p-3 rounded-lg font-medium text-sm min-w-[100px] bg-blue-50 text-blue-600 hover:bg-blue-100 border-2 border-blue-600'
                     }`}
                     aria-label={isSelected ? "Remove from plan" : "Add to plan"}
                   >
                     {isSelected ? (
-                      <span className="flex items-center justify-center gap-1">
-                        <X className="h-4 w-4" />
-                        Remove
-                      </span>
+                      <X className="h-4 w-4" />
                     ) : (
                       <span className="flex items-center justify-center gap-1">
                         <Plus className="h-4 w-4" />
@@ -446,17 +436,30 @@ export default function CarePlanView({ carePlan }: CarePlanViewProps) {
         <div className="mt-4 flex flex-wrap gap-3">
           <a
             href="/recommended-providers"
-            className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700"
+            className={`inline-flex items-center px-4 py-2 border text-sm font-medium rounded-md transition-colors ${
+              planSent
+                ? 'border-transparent text-white bg-blue-600 hover:bg-blue-700'
+                : 'border-gray-300 text-gray-700 bg-white hover:bg-gray-50'
+            }`}
           >
             Find a Provider
           </a>
-          <button
-            onClick={handleSendToBoard}
-            className="inline-flex items-center px-4 py-2 border border-blue-600 text-sm font-medium rounded-md text-blue-600 bg-white hover:bg-blue-50"
-          >
-            <Send className="h-4 w-4 mr-2" />
-            Send Plan to Board
-          </button>
+
+          {planSent ? (
+            <div className="inline-flex items-center px-4 py-2 text-sm font-medium text-green-700 bg-green-50 border border-green-300 rounded-md">
+              <CheckCircle className="h-4 w-4 mr-2" />
+              Plan Sent
+            </div>
+          ) : (
+            <button
+              onClick={handleSendToBoard}
+              className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700"
+            >
+              <Send className="h-4 w-4 mr-2" />
+              Send Plan to Board
+            </button>
+          )}
+
           <button
             onClick={() => window.print()}
             className="inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50"
