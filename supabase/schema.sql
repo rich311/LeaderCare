@@ -41,6 +41,10 @@ create table public.providers (
   content_resources boolean default false,
   content_resources_list text[] default '{}',
   denominations text[] default '{}',
+  retreat_facilitated boolean default false,
+  actual_therapists boolean default false,
+  general_relational_support text[] default '{}',
+  benevolence_request boolean default false,
   created_at timestamp with time zone default timezone('utc'::text, now()) not null,
   updated_at timestamp with time zone default timezone('utc'::text, now()) not null
 );

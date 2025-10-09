@@ -71,6 +71,10 @@ export interface Database {
           content_resources: boolean
           content_resources_list: string[]
           denominations: string[]
+          retreat_facilitated: boolean
+          actual_therapists: boolean
+          general_relational_support: string[]
+          benevolence_request: boolean
           created_at: string
           updated_at: string
         }
@@ -100,6 +104,10 @@ export interface Database {
           content_resources?: boolean
           content_resources_list?: string[]
           denominations?: string[]
+          retreat_facilitated?: boolean
+          actual_therapists?: boolean
+          general_relational_support?: string[]
+          benevolence_request?: boolean
           created_at?: string
           updated_at?: string
         }
@@ -129,6 +137,10 @@ export interface Database {
           content_resources?: boolean
           content_resources_list?: string[]
           denominations?: string[]
+          retreat_facilitated?: boolean
+          actual_therapists?: boolean
+          general_relational_support?: string[]
+          benevolence_request?: boolean
           created_at?: string
           updated_at?: string
         }

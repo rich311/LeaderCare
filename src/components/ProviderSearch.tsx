@@ -20,6 +20,10 @@ export default function ProviderSearch({ initialProviders, userId }: ProviderSea
   const [glooScholarship, setGlooScholarship] = useState(false)
   const [selectedContentResource, setSelectedContentResource] = useState<string>('')
   const [acceptingClients, setAcceptingClients] = useState(false)
+  const [retreatFacilitated, setRetreatFacilitated] = useState(false)
+  const [actualTherapists, setActualTherapists] = useState(false)
+  const [selectedRelationalSupport, setSelectedRelationalSupport] = useState<string>('')
+  const [benevolenceRequest, setBenevolenceRequest] = useState(false)
 
   // Get all unique specialties
   const allSpecialties = useMemo(() => {
@@ -47,6 +51,13 @@ export default function ProviderSearch({ initialProviders, userId }: ProviderSea
     'Evangelical',
     'Reformed'
   ]
+  const relationalSupportOptions = [
+    'Spiritual Directors',
+    'Exec/Leadership Coaches',
+    'Financial Guides',
+    'Nutrition/Health Coaches',
+    'Mentors'
+  ]
 
   // Filter providers
   const filteredProviders = useMemo(() => {
@@ -73,18 +84,27 @@ export default function ProviderSearch({ initialProviders, userId }: ProviderSea
       const matchesContentResource = !selectedContentResource ||
         provider.content_resources_list.includes(selectedContentResource)
 
+      // Relational support filter
+      const matchesRelationalSupport = !selectedRelationalSupport ||
+        provider.general_relational_support.includes(selectedRelationalSupport)
+
       // Location type filter
       const matchesLocationType = !locationType || provider.location_type === locationType || provider.location_type === 'both'
 
       // Other filters
       const matchesGloo = !glooScholarship || provider.gloo_scholarship_available
       const matchesAccepting = !acceptingClients || provider.accepting_new_clients
+      const matchesRetreat = !retreatFacilitated || provider.retreat_facilitated
+      const matchesTherapists = !actualTherapists || provider.actual_therapists
+      const matchesBenevolence = !benevolenceRequest || provider.benevolence_request
 
       return matchesSearch && matchesSpecialty && matchesDuration && matchesDenomination &&
-             matchesLocationType && matchesGloo && matchesContentResource && matchesAccepting
+             matchesLocationType && matchesGloo && matchesContentResource && matchesAccepting &&
+             matchesRelationalSupport && matchesRetreat && matchesTherapists && matchesBenevolence
     })
   }, [initialProviders, searchTerm, selectedSpecialties, selectedDuration, selectedDenomination,
-      locationType, glooScholarship, selectedContentResource, acceptingClients])
+      locationType, glooScholarship, selectedContentResource, acceptingClients, selectedRelationalSupport,
+      retreatFacilitated, actualTherapists, benevolenceRequest])
 
   const toggleSpecialty = (specialty: string) => {
     setSelectedSpecialties(prev =>
@@ -189,6 +209,23 @@ export default function ProviderSearch({ initialProviders, userId }: ProviderSea
             </select>
           </div>
 
+          {/* General Relational Support */}
+          <div className="mb-6">
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              General Relational Support
+            </label>
+            <select
+              value={selectedRelationalSupport}
+              onChange={(e) => setSelectedRelationalSupport(e.target.value)}
+              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500 text-gray-900"
+            >
+              <option value="">All</option>
+              {relationalSupportOptions.map(option => (
+                <option key={option} value={option}>{option}</option>
+              ))}
+            </select>
+          </div>
+
           {/* Location Type */}
           <div className="mb-6">
             <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -225,6 +262,36 @@ export default function ProviderSearch({ initialProviders, userId }: ProviderSea
                 className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
               />
               <span className="ml-2 text-sm text-gray-700">Gloo Impact Scholarships</span>
+            </label>
+
+            <label className="flex items-center">
+              <input
+                type="checkbox"
+                checked={retreatFacilitated}
+                onChange={(e) => setRetreatFacilitated(e.target.checked)}
+                className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+              />
+              <span className="ml-2 text-sm text-gray-700">Retreat Facilitated</span>
+            </label>
+
+            <label className="flex items-center">
+              <input
+                type="checkbox"
+                checked={actualTherapists}
+                onChange={(e) => setActualTherapists(e.target.checked)}
+                className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+              />
+              <span className="ml-2 text-sm text-gray-700">Actual Therapists</span>
+            </label>
+
+            <label className="flex items-center">
+              <input
+                type="checkbox"
+                checked={benevolenceRequest}
+                onChange={(e) => setBenevolenceRequest(e.target.checked)}
+                className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+              />
+              <span className="ml-2 text-sm text-gray-700">Benevolence Request</span>
             </label>
           </div>
         </div>
@@ -288,6 +355,14 @@ export default function ProviderSearch({ initialProviders, userId }: ProviderSea
                     </div>
                   )}
 
+                  {/* General Relational Support */}
+                  {provider.general_relational_support.length > 0 && (
+                    <div className="mt-2">
+                      <span className="text-sm font-medium text-gray-700">Relational Support: </span>
+                      <span className="text-sm text-gray-600">{provider.general_relational_support.join(', ')}</span>
+                    </div>
+                  )}
+
                   {/* Bio */}
                   {provider.bio && (
                     <p className="mt-3 text-gray-600 line-clamp-3">{provider.bio}</p>
@@ -348,6 +423,21 @@ export default function ProviderSearch({ initialProviders, userId }: ProviderSea
                         Content Resources
                       </span>
                     )}
+                    {provider.retreat_facilitated && (
+                      <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-teal-100 text-teal-800">
+                        Retreat Facilitated
+                      </span>
+                    )}
+                    {provider.actual_therapists && (
+                      <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-emerald-100 text-emerald-800">
+                        Licensed Therapists
+                      </span>
+                    )}
+                    {provider.benevolence_request && (
+                      <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-orange-100 text-orange-800">
+                        Benevolence Available
+                      </span>
+                    )}
                   </div>
                 </div>
 
@@ -374,9 +464,13 @@ export default function ProviderSearch({ initialProviders, userId }: ProviderSea
                   setSelectedDuration('')
                   setSelectedDenomination('')
                   setSelectedContentResource('')
+                  setSelectedRelationalSupport('')
                   setLocationType('')
                   setGlooScholarship(false)
                   setAcceptingClients(false)
+                  setRetreatFacilitated(false)
+                  setActualTherapists(false)
+                  setBenevolenceRequest(false)
                 }}
                 className="mt-4 text-blue-600 hover:text-blue-800"
               >
