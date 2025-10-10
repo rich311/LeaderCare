@@ -30,6 +30,18 @@ export default async function Home() {
                 Let&apos;s Make a Plan
               </Link>
             </div>
+
+            {/* Video Section */}
+            <div className="mt-12 max-w-4xl mx-auto">
+              <div className="relative w-full" style={{ paddingBottom: '56.25%' }}>
+                <iframe
+                  src="https://drive.google.com/file/d/1zng6f8QYu32qUyrK9T1Px_F25mhtfnpo/preview"
+                  className="absolute top-0 left-0 w-full h-full rounded-lg shadow-2xl"
+                  allow="autoplay"
+                  allowFullScreen
+                />
+              </div>
+            </div>
           </div>
         </div>
 
