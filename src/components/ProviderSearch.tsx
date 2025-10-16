@@ -232,7 +232,7 @@ export default function ProviderSearch({ initialProviders, userId }: ProviderSea
                 onChange={(e) => setAcceptingClients(e.target.checked)}
                 className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
               />
-              <span className="ml-2 text-sm text-gray-700">Accepting New Clients</span>
+              <span className="ml-2 text-sm text-gray-900">Accepting New Clients</span>
             </label>
 
             <label className="flex items-center">
@@ -242,7 +242,7 @@ export default function ProviderSearch({ initialProviders, userId }: ProviderSea
                 onChange={(e) => setGlooScholarship(e.target.checked)}
                 className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
               />
-              <span className="ml-2 text-sm text-gray-700">Gloo Impact Scholarships</span>
+              <span className="ml-2 text-sm text-gray-900">Gloo Impact Scholarships</span>
             </label>
 
             <label className="flex items-center">
@@ -252,7 +252,7 @@ export default function ProviderSearch({ initialProviders, userId }: ProviderSea
                 onChange={(e) => setRetreatFacilitated(e.target.checked)}
                 className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
               />
-              <span className="ml-2 text-sm text-gray-700">Retreat Facilitated</span>
+              <span className="ml-2 text-sm text-gray-900">Retreat Facilitated</span>
             </label>
 
             <label className="flex items-center">
@@ -262,7 +262,7 @@ export default function ProviderSearch({ initialProviders, userId }: ProviderSea
                 onChange={(e) => setActualTherapists(e.target.checked)}
                 className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
               />
-              <span className="ml-2 text-sm text-gray-700">Actual Therapists</span>
+              <span className="ml-2 text-sm text-gray-900">Actual Therapists</span>
             </label>
 
             <label className="flex items-center">
@@ -272,7 +272,7 @@ export default function ProviderSearch({ initialProviders, userId }: ProviderSea
                 onChange={(e) => setBenevolenceRequest(e.target.checked)}
                 className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
               />
-              <span className="ml-2 text-sm text-gray-700">Benevolence Request</span>
+              <span className="ml-2 text-sm text-gray-900">Benevolence Request</span>
             </label>
           </div>
 
@@ -302,7 +302,7 @@ export default function ProviderSearch({ initialProviders, userId }: ProviderSea
                       onChange={() => toggleSpecialty(specialty)}
                       className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
                     />
-                    <span className="ml-2 text-sm text-gray-700">{specialty}</span>
+                    <span className="ml-2 text-sm text-gray-900">{specialty}</span>
                   </label>
                 ))}
               </div>

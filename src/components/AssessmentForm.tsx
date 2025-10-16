@@ -221,7 +221,7 @@ export default function AssessmentForm({ userId }: AssessmentFormProps) {
                     onChange={() => toggleConcern(concern)}
                     className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
                   />
-                  <span className="ml-2 text-sm text-gray-700">{concern}</span>
+                  <span className="ml-2 text-sm text-gray-900">{concern}</span>
                 </label>
               ))}
             </div>
@@ -307,7 +307,7 @@ export default function AssessmentForm({ userId }: AssessmentFormProps) {
             <button
               type="button"
               onClick={() => setCurrentStep(1)}
-              className="flex-1 py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+              className="flex-1 py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-900 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
             >
               Back
             </button>
@@ -354,7 +354,7 @@ export default function AssessmentForm({ userId }: AssessmentFormProps) {
                   })}
                   className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
                 />
-                <span className="ml-2 text-sm text-gray-700">Interested in telehealth/online therapy</span>
+                <span className="ml-2 text-sm text-gray-900">Interested in telehealth/online therapy</span>
               </label>
 
               <label className="flex items-center">
@@ -367,7 +367,7 @@ export default function AssessmentForm({ userId }: AssessmentFormProps) {
                   })}
                   className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
                 />
-                <span className="ml-2 text-sm text-gray-700">Prefer faith-based counseling</span>
+                <span className="ml-2 text-sm text-gray-900">Prefer faith-based counseling</span>
               </label>
 
               <label className="flex items-center">
@@ -380,7 +380,7 @@ export default function AssessmentForm({ userId }: AssessmentFormProps) {
                   })}
                   className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
                 />
-                <span className="ml-2 text-sm text-gray-700">Open to group therapy/support groups</span>
+                <span className="ml-2 text-sm text-gray-900">Open to group therapy/support groups</span>
               </label>
             </div>
           </div>
@@ -389,7 +389,7 @@ export default function AssessmentForm({ userId }: AssessmentFormProps) {
             <button
               type="button"
               onClick={() => setCurrentStep(2)}
-              className="flex-1 py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+              className="flex-1 py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-900 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
             >
               Back
             </button>

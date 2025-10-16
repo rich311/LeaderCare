@@ -459,7 +459,7 @@ export default function CarePlanView({ carePlan }: CarePlanViewProps) {
             className={`inline-flex items-center px-4 py-2 border text-sm font-medium rounded-md transition-colors ${
               planSent
                 ? 'border-transparent text-white bg-blue-600 hover:bg-blue-700'
-                : 'border-gray-300 text-gray-700 bg-white hover:bg-gray-50'
+                : 'border-gray-300 text-gray-900 bg-white hover:bg-gray-50'
             }`}
           >
             Find a Provider
@@ -467,7 +467,7 @@ export default function CarePlanView({ carePlan }: CarePlanViewProps) {
 
           <button
             onClick={() => window.print()}
-            className="inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50"
+            className="inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-900 bg-white hover:bg-gray-50"
           >
             <Download className="h-4 w-4 mr-2" />
             Download PDF
