@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { Heart, User, LogOut, Menu, X } from 'lucide-react'
+import { Heart, Menu, X } from 'lucide-react'
 import { useState } from 'react'
 
 export default function Navigation({ user }: { user: { id: string; email?: string } | null }) {
@@ -48,41 +48,6 @@ export default function Navigation({ user }: { user: { id: string; email?: strin
 
           {/* Desktop User Menu */}
           <div className="hidden sm:ml-6 sm:flex sm:items-center space-x-4">
-            {user ? (
-              <>
-                <Link
-                  href="/profile"
-                  className="flex items-center text-sm text-gray-700 hover:text-gray-900"
-                >
-                  <User className="h-5 w-5 mr-1" />
-                  Profile
-                </Link>
-                <form action="/api/auth/signout" method="post">
-                  <button
-                    type="submit"
-                    className="flex items-center text-sm text-gray-700 hover:text-gray-900"
-                  >
-                    <LogOut className="h-5 w-5 mr-1" />
-                    Sign Out
-                  </button>
-                </form>
-              </>
-            ) : (
-              <>
-                <Link
-                  href="/auth/login"
-                  className="text-sm font-medium text-gray-700 hover:text-gray-900"
-                >
-                  Sign In
-                </Link>
-                <Link
-                  href="/auth/signup"
-                  className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700"
-                >
-                  Get Started
-                </Link>
-              </>
-            )}
           </div>
 
           {/* Mobile menu button */}
@@ -124,44 +89,6 @@ export default function Navigation({ user }: { user: { id: string; email?: strin
                 </Link>
               )
             })}
-          </div>
-          <div className="pt-4 pb-3 border-t border-gray-200">
-            {user ? (
-              <div className="space-y-1">
-                <Link
-                  href="/profile"
-                  className="block px-4 py-2 text-base font-medium text-gray-500 hover:text-gray-800 hover:bg-gray-100"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  Profile
-                </Link>
-                <form action="/api/auth/signout" method="post">
-                  <button
-                    type="submit"
-                    className="block w-full text-left px-4 py-2 text-base font-medium text-gray-500 hover:text-gray-800 hover:bg-gray-100"
-                  >
-                    Sign Out
-                  </button>
-                </form>
-              </div>
-            ) : (
-              <div className="space-y-1">
-                <Link
-                  href="/auth/login"
-                  className="block px-4 py-2 text-base font-medium text-gray-500 hover:text-gray-800 hover:bg-gray-100"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  Sign In
-                </Link>
-                <Link
-                  href="/auth/signup"
-                  className="block px-4 py-2 text-base font-medium text-blue-600 hover:text-blue-800 hover:bg-gray-100"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  Get Started
-                </Link>
-              </div>
-            )}
           </div>
         </div>
       )}

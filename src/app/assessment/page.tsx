@@ -1,19 +1,10 @@
-import { redirect } from 'next/navigation'
-import { createClient } from '@/lib/supabase/server'
 import Navigation from '@/components/Navigation'
 import Script from 'next/script'
 
 export default async function AssessmentPage() {
-  const supabase = await createClient()
-  const { data: { user } } = await supabase.auth.getUser()
-
-  if (!user) {
-    redirect('/auth/login?redirect=/assessment')
-  }
-
   return (
     <>
-      <Navigation user={user} />
+      <Navigation user={null} />
       <div className="min-h-screen bg-gray-50 py-8">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mb-8">
