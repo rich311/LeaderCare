@@ -1,0 +1,99 @@
+name: Update Analytics
+
+on:
+  schedule:
+    - cron: '0 9 * * *' # Runs at 9:00 AM GMT daily
+  workflow_dispatch: # Allow manual trigger from GitHub UI
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install Supabase client
+        run: npm install @supabase/supabase-js --force
+
+      - name: Calculate and update analytics
+        env:
+          SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
+          SUPABASE_KEY: ${{ secrets.NEXT_SERVICE_ROLE_KEY }}
+        run: |
+          node -e "
+          (async () => {
+            try {
+              const { createClient } = require('@supabase/supabase-js');
+              const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_KEY);
+
+              // Count total providers
+              const { count: totalProviders } = await supabase
+                .from('providers')
+                .select('*', { count: 'exact', head: true });
+
+              // Count total care plans
+              const { count: totalCarePlans } = await supabase
+                .from('care_plans')
+                .select('*', { count: 'exact', head: true });
+
+              // Count ministry leaders (profiles with role = 'leader')
+              const { count: totalMinistryLeaders } = await supabase
+                .from('profiles')
+                .select('*', { count: 'exact', head: true })
+                .eq('role', 'leader');
+
+              // Count total reviews
+              const { count: totalReviews } = await supabase
+                .from('provider_reviews')
+                .select('*', { count: 'exact', head: true });
+
+              // Count total saved providers
+              const { count: totalSavedProviders } = await supabase
+                .from('saved_providers')
+                .select('*', { count: 'exact', head: true });
+
+              // Count LiftCare eligible providers
+              const { count: liftcareEligible } = await supabase
+                .from('providers')
+                .select('*', { count: 'exact', head: true })
+                .eq('gloo_scholarship_available', true);
+
+              // Count providers accepting new clients
+              const { count: providersAccepting } = await supabase
+                .from('providers')
+                .select('*', { count: 'exact', head: true })
+                .eq('accepting_new_clients', true);
+
+              const stats = {
+                id: 1,
+                total_providers: totalProviders ?? 0,
+                total_care_plans: totalCarePlans ?? 0,
+                total_ministry_leaders: totalMinistryLeaders ?? 0,
+                total_reviews: totalReviews ?? 0,
+                total_saved_providers: totalSavedProviders ?? 0,
+                liftcare_eligible_providers: liftcareEligible ?? 0,
+                providers_accepting_clients: providersAccepting ?? 0,
+                computed_at: new Date().toISOString(),
+              };
+
+              console.log('Computed stats:', stats);
+
+              const { error } = await supabase
+                .from('analytics')
+                .upsert(stats, { onConflict: 'id' });
+
+              if (error) throw error;
+
+              console.log('Analytics updated successfully.');
+            } catch (err) {
+              console.error('Error updating analytics:', err.message);
+              process.exit(1);
+            }
+          })();
+          "
