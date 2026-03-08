@@ -567,7 +567,7 @@ export default function ProviderApplicationForm() {
                 onChange={(e) => setFormData({ ...formData, glooScholarship: e.target.checked })}
                 className="mr-2"
               />
-              <span className="font-medium">I accept Gloo Impact Scholarships</span>
+              <span className="font-medium">I accept LiftCare eligible</span>
             </label>
 
             <label className="flex items-center">

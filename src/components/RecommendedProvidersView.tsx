@@ -291,7 +291,7 @@ export default function RecommendedProvidersView({ carePlan, allProviders }: Rec
                 )}
                 {provider.gloo_scholarship_available && (
                   <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
-                    Gloo Impact Scholarships
+                    LiftCare eligible
                   </span>
                 )}
                 {provider.retreat_facilitated && (

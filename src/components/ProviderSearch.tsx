@@ -242,7 +242,7 @@ export default function ProviderSearch({ initialProviders, userId }: ProviderSea
                 onChange={(e) => setGlooScholarship(e.target.checked)}
                 className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
               />
-              <span className="ml-2 text-sm text-gray-900">Gloo Impact Scholarships</span>
+              <span className="ml-2 text-sm text-gray-900">LiftCare eligible</span>
             </label>
 
             <label className="flex items-center">
@@ -429,7 +429,7 @@ export default function ProviderSearch({ initialProviders, userId }: ProviderSea
                     )}
                     {provider.gloo_scholarship_available && (
                       <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
-                        Gloo Impact Scholarships
+                        LiftCare eligible
                       </span>
                     )}
                     {provider.content_resources && (

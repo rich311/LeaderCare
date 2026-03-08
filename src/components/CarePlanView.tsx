@@ -304,7 +304,7 @@ export default function CarePlanView({ carePlan }: CarePlanViewProps) {
                     <div className="flex items-center gap-2">
                       <h3 className="font-medium text-gray-900">{item.title}</h3>
                       {item.logo && (
-                        <Image src={item.logo} alt="Gloo Impact" width={60} height={16} className="h-4 w-auto" />
+                        <Image src={item.logo} alt="LiftCare eligible" width={60} height={16} className="h-4 w-auto" />
                       )}
                       {item.estimatedCost && (
                         <span className="text-sm font-semibold text-green-700">
